@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área de Membros · Entre no Forró</title>
+  <meta name="description" content="Área de membros do curso Entre no Forró — Forró Sem Parede. Acesse os módulos, aulas e bônus." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    ::selection { background: #000; color: #FF4D00; }
+
+    :root {
+      --orange: #FF4D00;
+      --black: #000000;
+      --white: #FFFFFF;
+      --ink: #0d0d0d;
+      --muted: rgba(255,255,255,0.55);
+      --line: rgba(255,255,255,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    img { display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; }
+    a { color: inherit; }
+
+    /* ── BANDEIRINHAS ─────────────────────────────────────── */
+    .bunting {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      height: 24px;
+      line-height: 0;
+    }
+    .bunting i {
+      width: 36px;
+      height: 22px;
+      flex: 0 0 auto;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+    .bunting i:nth-child(5n+1) { background: #E63946; }
+    .bunting i:nth-child(5n+2) { background: #FFD23F; }
+    .bunting i:nth-child(5n+3) { background: #2A9D8F; }
+    .bunting i:nth-child(5n+4) { background: #3A86FF; }
+    .bunting i:nth-child(5n+5) { background: #F72585; }
+
+    .mono {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .display {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       APP SHELL
+    ═══════════════════════════════════════════════════════ */
+    .app { display: none; min-height: 100vh; flex-direction: column; }
+    .app.active { display: flex; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--black);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .topbar-logo { height: 36px; cursor: pointer; }
+    .topbar-right { display: flex; align-items: center; gap: 18px; }
+    .topbar-progress { display: flex; align-items: center; gap: 12px; }
+    .topbar-progress-bar {
+      width: 120px;
+      height: 7px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .topbar-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--orange);
+      border-radius: 9999px;
+      transition: width 0.5s ease;
+    }
+    .topbar-progress-label { font-size: 10px; color: var(--muted); }
+    .main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 24px 80px; }
+
+    .view { display: none; }
+    .view.active { display: block; animation: fade 0.35s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    /* ── DASHBOARD HERO ──────────────────────────────────── */
+    .dash-hero {
+      background: var(--orange);
+      color: var(--black);
+      border-radius: 0 0 28px 28px;
+      margin: 0 -24px 40px;
+      padding: 44px 40px 40px;
+    }
+    .dash-hero-inner { max-width: 1152px; margin: 0 auto; }
+    .dash-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .dash-greeting {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      font-size: clamp(30px, 5vw, 58px);
+      margin-bottom: 22px;
+    }
+    .dash-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+    .dash-stat {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 16px 22px;
+      min-width: 130px;
+    }
+    .dash-stat-num { font-family: 'Archivo Black', sans-serif; font-size: 30px; letter-spacing: -0.04em; line-height: 1; }
+    .dash-stat-num .orange { color: var(--orange); }
+    .dash-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── CONTINUE CARD ───────────────────────────────────── */
+    .continue {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .continue-img { width: 100%; height: 100%; min-height: 170px; object-fit: cover; }
+    .continue-body { padding: 28px 30px; display: flex; flex-direction: column; justify-content: center; }
+    .continue-tag {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .continue-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 26px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .continue-meta { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .btn-primary {
+      align-self: flex-start;
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 14px;
+      padding: 13px 26px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,77,0,0.28); }
+
+    /* ── SECTION HEADERS ─────────────────────────────────── */
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 0.95;
+    }
+    .section-head .count {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+    }
+
+    /* ── MODULE GRID ─────────────────────────────────────── */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 56px;
+    }
+    .module-card {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: left;
+      transition: transform 0.25s, border-color 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .module-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+    .module-thumb-wrap { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+    .module-thumb { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .module-card:hover .module-thumb { transform: scale(1.05); }
+    .module-thumb-wrap::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0) 55%);
+    }
+    .module-index {
+      position: absolute; top: 12px; left: 12px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--black);
+      background: var(--orange);
+      padding: 5px 11px;
+      border-radius: 9999px;
+      z-index: 2;
+    }
+    .module-done-badge {
+      position: absolute; top: 12px; right: 12px;
+      width: 26px; height: 26px;
+      background: var(--orange);
+      color: var(--black);
+      border-radius: 50%;
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 2;
+    }
+    .module-card.complete .module-done-badge { display: flex; }
+    .module-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+    .module-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 21px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .module-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; flex: 1; }
+    .module-foot { display: flex; align-items: center; justify-content: space-between; }
+    .module-lessons-count {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+    }
+    .module-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; margin-top: 14px; }
+    .module-bar-fill { height: 100%; width: 0%; background: var(--orange); border-radius: 9999px; transition: width 0.5s; }
+    .module-arrow { color: var(--orange); }
+
+    /* ── BONUS GRID ──────────────────────────────────────── */
+    .bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .bonus-card {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .bonus-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+    .bonus-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: rgba(255,77,0,0.12);
+      color: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bonus-info h3 { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 5px; }
+    .bonus-info p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+    .bonus-pill {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--orange);
+      border: 1px solid rgba(255,77,0,0.35);
+      padding: 3px 9px;
+      border-radius: 9999px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       LESSON PLAYER VIEW
+    ═══════════════════════════════════════════════════════ */
+    .player-top { padding: 26px 0 22px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--orange); }
+
+    .player-layout { display: grid; grid-template-columns: 1fr 360px; gap: 28px; align-items: start; }
+
+    .player-stage {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .player-video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .player-video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
+    .player-video-overlay { position: relative; z-index: 2; text-align: center; padding: 24px; }
+    .player-play {
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      transition: transform 0.2s;
+    }
+    .player-play:hover { transform: scale(1.08); }
+    .player-video-note {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+    .player-info { padding: 26px 30px 30px; }
+    .player-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .player-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 0.95;
+      margin-bottom: 14px;
+    }
+    .player-desc { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 620px; margin-bottom: 26px; }
+    .player-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-complete {
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 14px;
+      padding: 14px 24px;
+      border-radius: 9999px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-complete:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,77,0,0.28); }
+    .btn-complete.done { background: rgba(255,255,255,0.08); color: var(--white); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      padding: 13px 20px;
+      border-radius: 9999px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+    .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-ghost:disabled:hover { border-color: var(--line); color: var(--white); }
+
+    /* ── PLAYLIST SIDEBAR ────────────────────────────────── */
+    .playlist {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      position: sticky;
+      top: 84px;
+    }
+    .playlist-head { padding: 20px 22px; border-bottom: 1px solid var(--line); }
+    .playlist-module {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .playlist-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 19px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .playlist-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; }
+    .playlist-bar-fill { height: 100%; width: 0%; background: var(--orange); transition: width 0.4s; }
+    .playlist-items { max-height: 60vh; overflow-y: auto; }
+    .playlist-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 22px;
+      background: transparent;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
+    }
+    .playlist-item:hover { background: rgba(255,255,255,0.04); }
+    .playlist-item.active { background: rgba(255,77,0,0.1); }
+    .playlist-item.active .pl-name { color: var(--orange); }
+    .pl-check {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: transparent;
+    }
+    .playlist-item.complete .pl-check { background: var(--orange); border-color: var(--orange); color: var(--black); }
+    .pl-meta { flex: 1; min-width: 0; }
+    .pl-num {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+    .pl-name {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pl-playing { flex-shrink: 0; color: var(--orange); display: none; }
+    .playlist-item.active .pl-playing { display: block; }
+
+    /* ── TOAST ───────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 26px; left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      padding: 14px 26px;
+      border-radius: 9999px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+      z-index: 200;
+      transition: transform 0.4s cubic-bezier(.2,.9,.3,1.4);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .app-foot {
+      border-top: 1px solid var(--line);
+      padding: 26px 24px;
+      text-align: center;
+    }
+    .app-foot p {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+    }
+    .app-foot a { color: var(--orange); text-decoration: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .player-layout { grid-template-columns: 1fr; }
+      .playlist { position: static; }
+      .playlist-items { max-height: none; }
+    }
+    @media (max-width: 620px) {
+      .topbar-progress { display: none; }
+      .continue { grid-template-columns: 1fr; }
+      .continue-img { min-height: 160px; }
+      .dash-hero { padding: 32px 24px; margin: 0 -24px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ APP ═══════════════════ -->
+  <div class="app active" id="app">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <img class="topbar-logo" src="assets/logo_white.png" alt="Entre no Forró" id="homeLogo" />
+        <div class="topbar-right">
+          <div class="topbar-progress">
+            <div class="topbar-progress-bar"><div class="topbar-progress-fill" id="topProgressFill"></div></div>
+            <span class="topbar-progress-label mono" id="topProgressLabel">0%</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main">
+      <!-- ───────── DASHBOARD ───────── -->
+      <section class="view active" id="dashView">
+        <div class="dash-hero">
+          <div class="dash-hero-inner">
+            <div class="dash-eyebrow">★ Curso Entre no Forró · Acesso vitalício</div>
+            <h1 class="dash-greeting" id="greeting">E aí?</h1>
+            <div class="dash-stats">
+              <div class="dash-stat">
+                <div class="dash-stat-num"><span id="statDone">0</span><span class="orange" id="statTotal">/18</span></div>
+                <div class="dash-stat-label">Aulas concluídas</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-num"><span id="statPct">0</span>%</div>
+                <div class="dash-stat-label">Progresso total</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-num" id="statModules">06</div>
+                <div class="dash-stat-label">Módulos práticos</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-num">06</div>
+                <div class="dash-stat-label">Bônus liberados</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- continue assistindo -->
+        <div class="continue" id="continueCard"></div>
+
+        <!-- módulos -->
+        <div class="section-head">
+          <h2>Seus módulos</h2>
+          <span class="count" id="modulesCount"></span>
+        </div>
+        <div class="module-grid" id="moduleGrid"></div>
+
+        <!-- bônus -->
+        <div class="section-head">
+          <h2>Bônus exclusivos</h2>
+          <span class="count">06 bônus</span>
+        </div>
+        <div class="bonus-grid" id="bonusGrid"></div>
+      </section>
+
+      <!-- ───────── PLAYER ───────── -->
+      <section class="view" id="playerView">
+        <div class="player-top">
+          <button class="back-link" id="backBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Voltar aos módulos
+          </button>
+        </div>
+        <div class="player-layout">
+          <div class="player-stage">
+            <div class="player-video" id="playerVideo"></div>
+            <div class="player-info">
+              <div class="player-eyebrow" id="playerEyebrow"></div>
+              <h1 class="player-title" id="playerTitle"></h1>
+              <p class="player-desc" id="playerDesc"></p>
+              <div class="player-actions">
+                <button class="btn-complete" id="completeBtn"></button>
+                <button class="btn-ghost" id="prevBtn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  Anterior
+                </button>
+                <button class="btn-ghost" id="nextBtn">
+                  Próxima
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="playlist">
+            <div class="playlist-head">
+              <div class="playlist-module" id="plModule"></div>
+              <div class="playlist-title" id="plTitle"></div>
+              <div class="playlist-bar"><div class="playlist-bar-fill" id="plBarFill"></div></div>
+            </div>
+            <div class="playlist-items" id="plItems"></div>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <footer class="app-foot">
+      <p>© 2026 Entre no Forró · Forró Sem Parede · Dúvidas? <a href="https://instagram.com/teo.arrastape" target="_blank" rel="noopener">@teo.arrastape</a></p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+  /* ════════════════════════════════════════════════════════
+     DADOS DO CURSO
+  ════════════════════════════════════════════════════════ */
+  const COURSE = [
+    {
+      id: 'ini', title: 'Trilha Iniciante', thumb: 'assets/iniciante/ini01.jpg',
+      desc: 'Forró do zero, em vídeo: do passo básico aos primeiros giros. Comece por aqui.',
+      lessons: [
+        { id: 'ini01', name: 'Passo Básico',                    thumb: 'assets/iniciante/ini01.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini01.mp4',                       desc: 'O dois-pra-lá, dois-pra-cá: o passo que é a base de todo o forró. Devagar, no seu tempo, até virar automático.' },
+        { id: 'ini02', name: 'Abraço',                          thumb: 'assets/iniciante/ini02.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini02.mp4',                            desc: 'A posição certa dos braços e do abraço pra conduzir e ser conduzida com conforto e segurança.' },
+        { id: 'ini03', name: 'Giro Simples',                    thumb: 'assets/iniciante/ini03.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini03.mp4',                     desc: 'O primeiro giro: como conduzir e executar a volta sem perder o tempo da música.' },
+        { id: 'ini04', name: 'Chuveirinho',                     thumb: 'assets/iniciante/ini04.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini04.mp4',                      desc: 'Um clássico do forró: o movimento de braços que enrola e desenrola com leveza.' },
+        { id: 'ini05', name: 'Chave de Braço e Charme da Dama', thumb: 'assets/iniciante/ini05.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini05.mp4', desc: 'A chave de braço do condutor e o charme da dama: elegância e conexão no meio do salão.' },
+        { id: 'ini06', name: 'Bom Dia + Encaixe',               thumb: 'assets/iniciante/ini06.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini06.mp4',               desc: 'O passo "bom dia" e o encaixe: transições suaves que dão fluidez à dança.' },
+        { id: 'ini07', name: 'Pião',                            thumb: 'assets/iniciante/ini07.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini07.mp4',                            desc: 'O giro contínuo da dama, conduzido com firmeza. O pião que impressiona na pista.' },
+        { id: 'ini08', name: 'Arco-Íris + Giro em Linha',       thumb: 'assets/iniciante/ini08.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini08.mp4',        desc: 'A combinação do arco-íris com o giro em linha pra deslocar pelo salão com estilo.' },
+        { id: 'ini09', name: 'Giro em Linha',                   thumb: 'assets/iniciante/ini09.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini09.mp4',                    desc: 'O giro em linha isolado: deslocamento e condução em linha reta, do jeito certo.' }
+      ]
+    },
+    {
+      id: 'm1', title: 'Base do Forró', thumb: 'assets/mod1.png',
+      desc: 'O alicerce de tudo: o passo, a postura e o ritmo na palma da mão.',
+      lessons: [
+        { id: 'm1a1', name: 'Passinho',  thumb: 'assets/mod1.png',         desc: 'O passo básico do forró pé de serra. Devagar, no espelho, até virar automático. É daqui que sai todo o resto.' },
+        { id: 'm1a2', name: 'Postura',   thumb: 'assets/aula_postura.png',  desc: 'Como ficar de pé, ombros, coluna e o eixo do corpo. Postura certa é o que separa quem trava de quem flui.' },
+        { id: 'm1a3', name: 'Ritmo',     thumb: 'assets/aula_ritmo.png',    desc: 'Sentir a batida da sanfona, da zabumba e do triângulo. Treine o ouvido pra nunca mais perder o tempo.' }
+      ]
+    },
+    {
+      id: 'm2', title: 'Condução', thumb: 'assets/mod2.png',
+      desc: 'Conduzir com firmeza e leveza pra ela te seguir sem esforço.',
+      lessons: [
+        { id: 'm2a1', name: 'Quadril',    thumb: 'assets/aula_quadril.png', desc: 'Solte o quadril e ganhe naturalidade. O movimento que tira a rigidez e dá molejo ao seu forró.' },
+        { id: 'm2a2', name: 'Abraço',     thumb: 'assets/aula_abraco.png',  desc: 'A posição certa dos braços e da mão nas costas. O abraço que transmite segurança sem apertar.' },
+        { id: 'm2a3', name: 'Liderança',  thumb: 'assets/mod2.png',         desc: 'Como sinalizar cada passo com o corpo pra ela entender sem você falar nada. A essência da condução.' }
+      ]
+    },
+    {
+      id: 'm3', title: 'Giros & Viradas', thumb: 'assets/mod3.png',
+      desc: 'Os movimentos que dão graça e impressionam no salão.',
+      lessons: [
+        { id: 'm3a1', name: 'Volta Básica',  thumb: 'assets/mod3.png',           desc: 'A primeira volta, o movimento que já muda a sua dança de figura. Simples, elegante e infalível.' },
+        { id: 'm3a2', name: 'Giro Lateral',  thumb: 'assets/aula_girolateral.png', desc: 'Conduza o giro dela com o braço no tempo certo. A pegada e o impulso que fazem girar bonito.' },
+        { id: 'm3a3', name: 'Virada',        thumb: 'assets/mod3.png',           desc: 'Combine condução e giro numa virada fluida. O movimento que arranca suspiro no meio da festa.' }
+      ]
+    },
+    {
+      id: 'm4', title: 'Charme & Chamego', thumb: 'assets/mod4.png',
+      desc: 'O tempero que transforma passos em uma dança envolvente.',
+      lessons: [
+        { id: 'm4a1', name: 'Olhar',     thumb: 'assets/mod4.png',         desc: 'Como usar o olhar pra criar conexão sem ser invasivo. O detalhe que faz toda a diferença no chamego.' },
+        { id: 'm4a2', name: 'Presença',  thumb: 'assets/aula_postura.png', desc: 'Ocupe o espaço com confiança. A presença que faz ela querer dançar mais uma e mais outra com você.' },
+        { id: 'm4a3', name: 'Improviso', thumb: 'assets/mod1.png',         desc: 'Saia do passo decorado e dance o que a música pedir. Liberdade pra improvisar sem perder o controle.' }
+      ]
+    },
+    {
+      id: 'm5', title: 'Convidar a Dançar', thumb: 'assets/mod5.png',
+      desc: 'Chegue, convide e leve pro salão sem medo do "não".',
+      lessons: [
+        { id: 'm5a1', name: 'Abordagem',  thumb: 'assets/mod5.png',         desc: 'A forma certa de chegar e convidar. Postura, fala e timing pra aumentar muito o seu sim.' },
+        { id: 'm5a2', name: 'Confiança',  thumb: 'assets/aula_postura.png', desc: 'Como destravar a cabeça e parar de pensar demais. A mentalidade de quem não tem medo do salão.' },
+        { id: 'm5a3', name: 'Social',     thumb: 'assets/mod6.png',         desc: 'Etiqueta do salão: trocar de par, agradecer e circular. Como ser o cara que todo mundo gosta de dançar.' }
+      ]
+    },
+    {
+      id: 'm6', title: 'Noite de Festa', thumb: 'assets/mod6.png',
+      desc: 'Junte tudo e seja a atração da próxima festa junina.',
+      lessons: [
+        { id: 'm6a1', name: 'Repertório', thumb: 'assets/mod6.png', desc: 'Monte seu repertório de passos pra nunca repetir a mesma coisa. Variedade que mantém a dança viva.' },
+        { id: 'm6a2', name: 'Sequências', thumb: 'assets/mod3.png', desc: 'Encadeie passos, giros e viradas em sequências fluidas. Como dançar do começo ao fim sem travar.' },
+        { id: 'm6a3', name: 'Salão',      thumb: 'assets/mod6.png', desc: 'Aplique tudo num arraiá de verdade. Deslocamento no salão, lotação e como brilhar na festa real.' }
+      ]
+    }
+  ];
+
+  const BONUSES = [
+    { title: 'Guia da Abordagem Certa', desc: 'Como chamar pra dançar sem levar fora.', tag: 'PDF' },
+    { title: 'Playlist Secreta "Arrasta-pé"', desc: 'Os melhores forrós pra treinar o ritmo em casa.', tag: 'Playlist' },
+    { title: 'Comunidade VIP de Alunos', desc: 'Tire dúvidas e marque festas com a galera.', tag: 'Grupo' },
+    { title: 'Aula Bônus: Passos Avançados', desc: 'O extra pra virar atração da festa.', tag: 'Vídeo' },
+    { title: 'Agenda de Forrós', desc: 'Eventos e forrós perto de você.', tag: 'Lista' },
+    { title: 'Checklist Anti-Travada', desc: 'O passo a passo pra não congelar no salão.', tag: 'PDF' }
+  ];
+
+  const TOTAL_LESSONS = COURSE.reduce((n, m) => n + m.lessons.length, 0);
+  const FLAT = COURSE.flatMap((m, mi) => m.lessons.map((l, li) => ({ ...l, mIndex: mi, lIndex: li, module: m })));
+
+  /* ════════════════════════════════════════════════════════
+     ESTADO (localStorage)
+  ════════════════════════════════════════════════════════ */
+  const LS_DONE = 'enf_done';
+  const LS_LAST = 'enf_last';
+
+  let done = new Set(JSON.parse(localStorage.getItem(LS_DONE) || '[]'));
+
+  const saveDone = () => localStorage.setItem(LS_DONE, JSON.stringify([...done]));
+  const $ = (id) => document.getElementById(id);
+
+  function enterApp() {
+    $('greeting').textContent = saudacao() + '! Bora dançar?';
+    $('statTotal').textContent = '/' + TOTAL_LESSONS;
+    $('statModules').textContent = String(COURSE.length).padStart(2, '0');
+    $('modulesCount').textContent = `${String(COURSE.length).padStart(2,'0')} módulos · ${TOTAL_LESSONS} aulas`;
+    renderDashboard();
+    showView('dash');
+  }
+
+  function saudacao() {
+    const h = new Date().getHours();
+    if (h < 12) return 'Bom dia';
+    if (h < 18) return 'Boa tarde';
+    return 'Boa noite';
+  }
+
+  /* ════════════════════════════════════════════════════════
+     RENDER · DASHBOARD
+  ════════════════════════════════════════════════════════ */
+  function renderDashboard() {
+    updateProgress();
+    renderContinue();
+    renderModules();
+    renderBonuses();
+  }
+
+  function updateProgress() {
+    const n = done.size;
+    const pct = Math.round((n / TOTAL_LESSONS) * 100);
+    $('statDone').textContent = n;
+    $('statPct').textContent = pct;
+    $('topProgressFill').style.width = pct + '%';
+    $('topProgressLabel').textContent = pct + '%';
+  }
+
+  function nextLessonToWatch() {
+    const lastId = localStorage.getItem(LS_LAST);
+    const notDone = FLAT.find((l) => !done.has(l.id));
+    if (lastId) {
+      const last = FLAT.find((l) => l.id === lastId);
+      if (last && !done.has(last.id)) return last;
+    }
+    return notDone || FLAT[0];
+  }
+
+  function renderContinue() {
+    const allDone = done.size === TOTAL_LESSONS;
+    const l = nextLessonToWatch();
+    const card = $('continueCard');
+    if (allDone) {
+      card.innerHTML = `
+        <img class="continue-img" src="assets/mod6.png" alt="" />
+        <div class="continue-body">
+          <div class="continue-tag">★ Curso concluído</div>
+          <div class="continue-title">Você saiu da parede!</div>
+          <p class="continue-meta">Todas as 18 aulas concluídas. Bora pro arraiá mostrar o que aprendeu — e revisar sempre que quiser.</p>
+          <button class="btn-primary" data-go="${l.id}">Revisar aulas
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </button>
+        </div>`;
+    } else {
+      const started = done.size > 0 || localStorage.getItem(LS_LAST);
+      card.innerHTML = `
+        <img class="continue-img" src="${l.thumb}" alt="" />
+        <div class="continue-body">
+          <div class="continue-tag">${started ? '▶ Continuar de onde parou' : '▶ Comece por aqui'}</div>
+          <div class="continue-title">${l.name}</div>
+          <p class="continue-meta">Módulo ${String(l.mIndex + 1).padStart(2,'0')} · ${l.module.title} — Aula ${l.lIndex + 1}</p>
+          <button class="btn-primary" data-go="${l.id}">${started ? 'Continuar aula' : 'Começar agora'}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>`;
+    }
+    card.querySelector('[data-go]').addEventListener('click', (e) => openLesson(e.currentTarget.dataset.go));
+  }
+
+  function moduleProgress(m) {
+    const total = m.lessons.length;
+    const n = m.lessons.filter((l) => done.has(l.id)).length;
+    return { n, total, pct: Math.round((n / total) * 100) };
+  }
+
+  function renderModules() {
+    const grid = $('moduleGrid');
+    grid.innerHTML = '';
+    COURSE.forEach((m, i) => {
+      const p = moduleProgress(m);
+      const el = document.createElement('button');
+      el.className = 'module-card' + (p.pct === 100 ? ' complete' : '');
+      el.innerHTML = `
+        <div class="module-thumb-wrap">
+          <span class="module-index">Módulo ${String(i + 1).padStart(2, '0')}</span>
+          <span class="module-done-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <img class="module-thumb" src="${m.thumb}" alt="${m.title}" />
+        </div>
+        <div class="module-body">
+          <div class="module-title">${m.title}</div>
+          <p class="module-desc">${m.desc}</p>
+          <div class="module-foot">
+            <span class="module-lessons-count">${p.n}/${p.total} aulas</span>
+            <span class="module-arrow">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="module-bar"><div class="module-bar-fill" style="width:${p.pct}%"></div></div>
+        </div>`;
+      el.addEventListener('click', () => openLesson(m.lessons[0].id, true));
+      grid.appendChild(el);
+    });
+  }
+
+  function renderBonuses() {
+    const grid = $('bonusGrid');
+    grid.innerHTML = '';
+    BONUSES.forEach((b) => {
+      const el = document.createElement('div');
+      el.className = 'bonus-card';
+      el.innerHTML = `
+        <div class="bonus-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <div class="bonus-info">
+          <h3>${b.title}</h3>
+          <p>${b.desc}</p>
+          <span class="bonus-pill">${b.tag} · Liberado</span>
+        </div>`;
+      grid.appendChild(el);
+    });
+  }
+
+  /* ════════════════════════════════════════════════════════
+     PLAYER
+  ════════════════════════════════════════════════════════ */
+  let currentId = null;
+
+  function openLesson(id, scrollTop) {
+    currentId = id;
+    localStorage.setItem(LS_LAST, id);
+    renderPlayer();
+    showView('player');
+    if (scrollTop !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderVideoStage(l) {
+    const stage = $('playerVideo');
+    if (l.video) {
+      const src = l.video.split('/').map(encodeURIComponent).join('/');
+      const poster = encodeURI(l.thumb);
+      stage.innerHTML = `<video controls playsinline preload="metadata" poster="${poster}"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;opacity:1;z-index:3;">
+        <source src="${src}" type="video/mp4" />
+        Seu navegador não suporta vídeo HTML5.
+      </video>`;
+    } else {
+      stage.innerHTML = `
+        <img src="${encodeURI(l.thumb)}" alt="${l.name}" />
+        <div class="player-video-overlay">
+          <div class="player-play">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </div>
+          <div class="player-video-note">Vídeo desta aula em breve</div>
+        </div>`;
+    }
+  }
+
+  function renderPlayer() {
+    const idx = FLAT.findIndex((l) => l.id === currentId);
+    const l = FLAT[idx];
+    const m = l.module;
+
+    renderVideoStage(l);
+    $('playerEyebrow').textContent = `Módulo ${String(l.mIndex + 1).padStart(2,'0')} · ${m.title} — Aula ${l.lIndex + 1}`;
+    $('playerTitle').textContent = l.name;
+    $('playerDesc').textContent = l.desc;
+
+    // complete button
+    const isDone = done.has(l.id);
+    const cb = $('completeBtn');
+    cb.className = 'btn-complete' + (isDone ? ' done' : '');
+    cb.innerHTML = isDone
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Aula concluída'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Marcar como concluída';
+    cb.onclick = () => toggleDone(l.id);
+
+    // prev / next (global flow)
+    const prev = FLAT[idx - 1], next = FLAT[idx + 1];
+    $('prevBtn').disabled = !prev;
+    $('nextBtn').disabled = !next;
+    $('prevBtn').onclick = () => prev && openLesson(prev.id);
+    $('nextBtn').onclick = () => next && openLesson(next.id);
+
+    // playlist (this module)
+    $('plModule').textContent = `Módulo ${String(l.mIndex + 1).padStart(2,'0')}`;
+    $('plTitle').textContent = m.title;
+    const mp = moduleProgress(m);
+    $('plBarFill').style.width = mp.pct + '%';
+
+    const wrap = $('plItems');
+    wrap.innerHTML = '';
+    m.lessons.forEach((ls, i) => {
+      const active = ls.id === currentId;
+      const complete = done.has(ls.id);
+      const item = document.createElement('button');
+      item.className = 'playlist-item' + (active ? ' active' : '') + (complete ? ' complete' : '');
+      item.innerHTML = `
+        <span class="pl-check">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="pl-meta">
+          <span class="pl-num">Aula ${i + 1}</span>
+          <span class="pl-name">${ls.name}</span>
+        </span>
+        <span class="pl-playing">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+        </span>`;
+      item.addEventListener('click', () => openLesson(ls.id));
+      wrap.appendChild(item);
+    });
+  }
+
+  function toggleDone(id) {
+    if (done.has(id)) {
+      done.delete(id);
+    } else {
+      done.add(id);
+      const idx = FLAT.findIndex((l) => l.id === id);
+      const next = FLAT[idx + 1];
+      if (done.size === TOTAL_LESSONS) {
+        toast('🎉 Curso concluído! Bora pro arraiá!');
+      } else {
+        toast('✓ Aula concluída!');
+        // auto-advance after a beat
+        if (next) setTimeout(() => { if (currentId === id) openLesson(next.id); }, 700);
+      }
+    }
+    saveDone();
+    updateProgress();
+    renderPlayer();
+  }
+
+  /* ════════════════════════════════════════════════════════
+     NAV / UTIL
+  ════════════════════════════════════════════════════════ */
+  function showView(name) {
+    document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+    $(name + 'View').classList.add('active');
+    if (name === 'dash') renderDashboard();
+  }
+
+  $('backBtn').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  $('homeLogo').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  let toastTimer;
+  function toast(msg) {
+    const t = $('toast');
+    t.innerHTML = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  /* ── BANDEIRINHAS render ── */
+  document.querySelectorAll('.bunting').forEach((b) => {
+    b.innerHTML = Array.from({ length: 40 }, () => '<i></i>').join('');
+  });
+
+  /* ════════════════════════════════════════════════════════
+     BOOT
+  ════════════════════════════════════════════════════════ */
+  enterApp();
+  </script>
+</body>
+</html>

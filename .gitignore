@@ -1,0 +1,16 @@
+# Dependências
+node_modules/
+
+# Vídeos originais — hospedados no Vercel Blob, não versionar (arquivos grandes)
+aulas-iniciante/
+
+# Ambiente / segredos
+.env
+.env.local
+*.log
+
+# Sistema
+.DS_Store
+
+# Claude local
+.claude/settings.local.json
