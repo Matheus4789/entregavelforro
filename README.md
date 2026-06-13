@@ -7,17 +7,18 @@
 
 - **Acesso direto** — sem tela de login; abre já no dashboard com os entregáveis.
 - **Dashboard** — saudação por horário, estatísticas (dinâmicas), barra de progresso e "continuar de onde parou".
-- **Trilha Iniciante (9 aulas em vídeo)** — primeiro módulo, com os vídeos hospedados no **YouTube** (embed) tocando direto no player.
-- **+6 módulos × 3 aulas** da oferta (placeholder de vídeo) — total **7 módulos · 27 aulas**.
-- **Player de aula** — vídeo (YouTube) ou placeholder, descrição, lista lateral (playlist), marcar como concluída, anterior/próxima e avanço automático.
+- **2 trilhas · 17 aulas em vídeo** — Trilha Iniciante (9) e Trilha Intermediária (8), com os vídeos hospedados no **YouTube** tocando num player nativo.
+- **Player nativo** — UI própria (play/pause, seek, tempo, velocidade, mudo, fullscreen) com a barra/branding do YouTube ocultos; lista lateral (playlist), marcar como concluída, anterior/próxima e avanço automático ao terminar.
+- **Miniaturas** — reaproveitadas das artes da oferta (`assets/mod*.png`, `assets/aula_*.png`).
 - **6 bônus** liberados.
 - **Progresso salvo** em `localStorage` (chaves `enf_done`, `enf_last`).
 
-## Vídeos (YouTube)
+## Vídeos (YouTube) e player nativo
 
 As aulas estão mapeadas em `COURSE[].lessons[]` pelo campo `yt` (ID do vídeo do YouTube).
-O player monta o embed em `renderVideoStage()` usando `youtube-nocookie.com/embed/<id>`.
-As miniaturas dos cards/playlist ficam em `assets/iniciante/iniNN.jpg`.
+O player nativo (`buildNativePlayer`) carrega o vídeo via IFrame API com `controls=0` e
+constrói a própria UI; a barra/branding do YouTube ficam ocultos por recorte do quadro
+(variável CSS `--np-zoom` no `.np` — aumente se aparecer algo, diminua se cortar demais).
 
 Para trocar/adicionar um vídeo, basta editar o `yt: '<id>'` da aula (o ID é o trecho
 de `youtube.com/watch?v=<id>`). Os vídeos precisam estar **Público** ou **Não listado**
@@ -37,8 +38,7 @@ python3 -m http.server 8080
 
 ```
 index.html         → app completo (HTML + CSS + JS inline)
-assets/            → logos e miniaturas da oferta
-assets/iniciante/  → posters das aulas de iniciante (cards/playlist)
+assets/            → logos e miniaturas (artes da oferta, usadas nos cards/aulas)
 ```
 
 ## Conectar mais vídeos
