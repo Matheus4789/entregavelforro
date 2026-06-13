@@ -414,6 +414,21 @@
     }
     .bd-video { position: relative; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
 
+    /* conteúdo sendo gerado */
+    .bd-soon { text-align: center; padding: 56px 24px; border: 1px dashed rgba(255,255,255,0.18); border-radius: 18px; background: rgba(255,255,255,0.02); }
+    .bd-soon-icon {
+      width: 66px; height: 66px; margin: 0 auto 20px; border-radius: 50%;
+      background: rgba(255,77,0,0.12); color: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bd-soon-icon svg { animation: spin 2.6s linear infinite; }
+    .bd-soon-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.03em; font-size: 22px; margin-bottom: 10px; }
+    .bd-soon-text { font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 420px; margin: 0 auto; }
+    .bd-soon-dots::after { content: ''; animation: bdDots 1.5s steps(1, end) infinite; }
+    @keyframes bdDots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+
+    .bonus-pill.pending { color: var(--muted); border-color: var(--line); }
+
     /* ═══════════════════════════════════════════════════════
        LESSON PLAYER VIEW
     ═══════════════════════════════════════════════════════ */
@@ -1082,7 +1097,7 @@
         <div class="bonus-info">
           <h3>${b.title}</h3>
           <p>${b.desc}</p>
-          <span class="bonus-pill">${b.tag} · Acessar</span>
+          <span class="bonus-pill${isBonusPending(b) ? ' pending' : ''}">${b.tag} · ${isBonusPending(b) ? 'Em breve' : 'Acessar'}</span>
         </div>`;
       el.addEventListener('click', () => openBonus(b.id));
       grid.appendChild(el);
@@ -1092,6 +1107,18 @@
   /* ════════════════════════════════════════════════════════
      BÔNUS (entregáveis)
   ════════════════════════════════════════════════════════ */
+  const isBonusPending = (b) => (b.type === 'link' && !b.url) || (b.type === 'video' && !b.yt);
+
+  function bonusSoonHTML() {
+    return `<div class="bd-soon">
+      <div class="bd-soon-icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div class="bd-soon-title">Conteúdo sendo gerado</div>
+      <p class="bd-soon-text">Estamos preparando este bônus pra você<span class="bd-soon-dots"></span><br/>Em breve ele aparece aqui na sua área de membros.</p>
+    </div>`;
+  }
+
   function openBonus(id) {
     const b = BONUSES.find((x) => x.id === id);
     if (!b) return;
@@ -1148,13 +1175,13 @@
       body = b.url
         ? `<a class="bd-cta" href="${b.url}" target="_blank" rel="noopener">${esc(b.cta)}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>`
-        : `<div class="bd-note">🔗 Link do grupo ainda não configurado. Defina <strong>COMUNIDADE_URL</strong> no topo do script (index.html) com o convite do seu grupo de WhatsApp/Telegram.</div>`;
+        : bonusSoonHTML();
     }
 
     else if (b.type === 'video') {
       body = b.yt
         ? `<div class="bd-video" id="bdVideo"></div>`
-        : `<div class="bd-note">🎬 Vídeo bônus ainda não configurado. Defina <strong>AULA_BONUS_YT</strong> no topo do script (index.html) com o ID do vídeo do YouTube.</div>`;
+        : bonusSoonHTML();
     }
 
     wrap.innerHTML = `
