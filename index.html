@@ -398,8 +398,13 @@
     }
 
     /* ── NATIVE PLAYER (YouTube por baixo, UI própria) ─────── */
-    .np { position: absolute; inset: 0; background: #000; overflow: hidden; }
-    .np .np-frame { position: absolute; inset: 0; z-index: 1; }
+    /* --np-zoom: amplia o quadro p/ recortar título/logo/marca-d'água do YouTube
+       nas bordas. Aumente se ainda aparecer algo; diminua se cortar demais a imagem. */
+    .np { position: absolute; inset: 0; background: #000; overflow: hidden; --np-zoom: 1.34; }
+    .np .np-frame {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      transform: scale(var(--np-zoom)); transform-origin: center center;
+    }
     .np iframe, .np .np-frame > div { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .np-poster { position: absolute; inset: 0; z-index: 3; background-size: cover; background-position: center; }
     .np.started .np-poster { display: none; }
