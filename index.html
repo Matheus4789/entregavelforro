@@ -692,15 +692,15 @@
       id: 'ini', title: 'Trilha Iniciante', thumb: 'assets/iniciante/ini01.jpg',
       desc: 'Forró do zero, em vídeo: do passo básico aos primeiros giros. Comece por aqui.',
       lessons: [
-        { id: 'ini01', name: 'Passo Básico',                    thumb: 'assets/iniciante/ini01.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini01.mp4',                       desc: 'O dois-pra-lá, dois-pra-cá: o passo que é a base de todo o forró. Devagar, no seu tempo, até virar automático.' },
-        { id: 'ini02', name: 'Abraço',                          thumb: 'assets/iniciante/ini02.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini02.mp4',                            desc: 'A posição certa dos braços e do abraço pra conduzir e ser conduzida com conforto e segurança.' },
-        { id: 'ini03', name: 'Giro Simples',                    thumb: 'assets/iniciante/ini03.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini03.mp4',                     desc: 'O primeiro giro: como conduzir e executar a volta sem perder o tempo da música.' },
-        { id: 'ini04', name: 'Chuveirinho',                     thumb: 'assets/iniciante/ini04.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini04.mp4',                      desc: 'Um clássico do forró: o movimento de braços que enrola e desenrola com leveza.' },
-        { id: 'ini05', name: 'Chave de Braço e Charme da Dama', thumb: 'assets/iniciante/ini05.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini05.mp4', desc: 'A chave de braço do condutor e o charme da dama: elegância e conexão no meio do salão.' },
-        { id: 'ini06', name: 'Bom Dia + Encaixe',               thumb: 'assets/iniciante/ini06.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini06.mp4',               desc: 'O passo "bom dia" e o encaixe: transições suaves que dão fluidez à dança.' },
-        { id: 'ini07', name: 'Pião',                            thumb: 'assets/iniciante/ini07.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini07.mp4',                            desc: 'O giro contínuo da dama, conduzido com firmeza. O pião que impressiona na pista.' },
-        { id: 'ini08', name: 'Arco-Íris + Giro em Linha',       thumb: 'assets/iniciante/ini08.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini08.mp4',        desc: 'A combinação do arco-íris com o giro em linha pra deslocar pelo salão com estilo.' },
-        { id: 'ini09', name: 'Giro em Linha',                   thumb: 'assets/iniciante/ini09.jpg', video: 'https://6vwmhq4yqruvcfdd.public.blob.vercel-storage.com/aulas-iniciante/ini09.mp4',                    desc: 'O giro em linha isolado: deslocamento e condução em linha reta, do jeito certo.' }
+        { id: 'ini01', name: 'Passo Básico',                    thumb: 'assets/iniciante/ini01.jpg', yt: 'tW25NPPJNHw',                       desc: 'O dois-pra-lá, dois-pra-cá: o passo que é a base de todo o forró. Devagar, no seu tempo, até virar automático.' },
+        { id: 'ini02', name: 'Abraço',                          thumb: 'assets/iniciante/ini02.jpg', yt: 'KW4R4tJew-o',                            desc: 'A posição certa dos braços e do abraço pra conduzir e ser conduzida com conforto e segurança.' },
+        { id: 'ini03', name: 'Giro Simples',                    thumb: 'assets/iniciante/ini03.jpg', yt: 'YKN_f-mAOwU',                     desc: 'O primeiro giro: como conduzir e executar a volta sem perder o tempo da música.' },
+        { id: 'ini04', name: 'Chuveirinho',                     thumb: 'assets/iniciante/ini04.jpg', yt: '3CjfSBirhKI',                      desc: 'Um clássico do forró: o movimento de braços que enrola e desenrola com leveza.' },
+        { id: 'ini05', name: 'Chave de Braço e Charme da Dama', thumb: 'assets/iniciante/ini05.jpg', yt: '1Tm25-p2vDk', desc: 'A chave de braço do condutor e o charme da dama: elegância e conexão no meio do salão.' },
+        { id: 'ini06', name: 'Bom Dia + Encaixe',               thumb: 'assets/iniciante/ini06.jpg', yt: 'gpmgWUSdSkQ',               desc: 'O passo "bom dia" e o encaixe: transições suaves que dão fluidez à dança.' },
+        { id: 'ini07', name: 'Pião',                            thumb: 'assets/iniciante/ini07.jpg', yt: '8Apw1zsRbu4',                            desc: 'O giro contínuo da dama, conduzido com firmeza. O pião que impressiona na pista.' },
+        { id: 'ini08', name: 'Arco-Íris + Giro em Linha',       thumb: 'assets/iniciante/ini08.jpg', yt: 'rO_jVRIk8gI',        desc: 'A combinação do arco-íris com o giro em linha pra deslocar pelo salão com estilo.' },
+        { id: 'ini09', name: 'Giro em Linha',                   thumb: 'assets/iniciante/ini09.jpg', yt: 'V4OAbAVku2Y',                    desc: 'O giro em linha isolado: deslocamento e condução em linha reta, do jeito certo.' }
       ]
     },
     {
@@ -929,7 +929,14 @@
 
   function renderVideoStage(l) {
     const stage = $('playerVideo');
-    if (l.video) {
+    if (l.yt) {
+      stage.innerHTML = `<iframe
+        src="https://www.youtube-nocookie.com/embed/${l.yt}?rel=0&modestbranding=1"
+        title="${l.name}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
+        style="position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;"></iframe>`;
+    } else if (l.video) {
       const src = l.video.split('/').map(encodeURIComponent).join('/');
       const poster = encodeURI(l.thumb);
       stage.innerHTML = `<video controls playsinline preload="metadata" poster="${poster}"

@@ -7,26 +7,30 @@
 
 - **Acesso direto** — sem tela de login; abre já no dashboard com os entregáveis.
 - **Dashboard** — saudação por horário, estatísticas (dinâmicas), barra de progresso e "continuar de onde parou".
-- **Trilha Iniciante (9 vídeos reais)** — primeiro módulo, com os MP4 de `aulas-iniciante/` tocando direto no player (`<video controls>`), poster gerado de um frame de cada aula.
+- **Trilha Iniciante (9 aulas em vídeo)** — primeiro módulo, com os vídeos hospedados no **YouTube** (embed) tocando direto no player.
 - **+6 módulos × 3 aulas** da oferta (placeholder de vídeo) — total **7 módulos · 27 aulas**.
-- **Player de aula** — vídeo real ou placeholder, descrição, lista lateral (playlist), marcar como concluída, anterior/próxima e avanço automático.
+- **Player de aula** — vídeo (YouTube) ou placeholder, descrição, lista lateral (playlist), marcar como concluída, anterior/próxima e avanço automático.
 - **6 bônus** liberados.
 - **Progresso salvo** em `localStorage` (chaves `enf_done`, `enf_last`).
 
-## Trilha Iniciante (vídeos)
+## Vídeos (YouTube)
 
-Os 9 vídeos ficam em `aulas-iniciante/*.mp4` e estão mapeados em `COURSE[0].lessons[]`
-(campo `video`). As miniaturas foram extraídas com ffmpeg para `assets/iniciante/iniNN.jpg`.
-Para regerar uma miniatura: `ffmpeg -y -ss 4 -i "aulas-iniciante/ARQUIVO.mp4" -frames:v 1 -vf scale=640:-1 -q:v 4 assets/iniciante/iniNN.jpg`.
+As aulas estão mapeadas em `COURSE[].lessons[]` pelo campo `yt` (ID do vídeo do YouTube).
+O player monta o embed em `renderVideoStage()` usando `youtube-nocookie.com/embed/<id>`.
+As miniaturas dos cards/playlist ficam em `assets/iniciante/iniNN.jpg`.
+
+Para trocar/adicionar um vídeo, basta editar o `yt: '<id>'` da aula (o ID é o trecho
+de `youtube.com/watch?v=<id>`). Os vídeos precisam estar **Público** ou **Não listado**
+no YouTube (vídeos *Privados* não tocam em embed).
 
 ## Como rodar
 
-Tudo é estático. Abra direto ou sirva localmente:
+Tudo é estático. Abra o `index.html` direto ou sirva localmente:
 
 ```bash
-npx serve .        # recomendado: suporta range requests (seek nos vídeos funciona)
+npx serve .
 # ou
-python3 -m http.server 8080   # funciona, mas sem seek nos vídeos (não faz range request)
+python3 -m http.server 8080
 ```
 
 ## Estrutura
@@ -34,16 +38,15 @@ python3 -m http.server 8080   # funciona, mas sem seek nos vídeos (não faz ran
 ```
 index.html         → app completo (HTML + CSS + JS inline)
 assets/            → logos e miniaturas da oferta
-assets/iniciante/  → posters gerados dos vídeos de iniciante
-aulas-iniciante/   → 9 vídeos .mp4 da Trilha Iniciante
+assets/iniciante/  → posters das aulas de iniciante (cards/playlist)
 ```
 
 ## Conectar mais vídeos
 
-A Trilha Iniciante já está com vídeo real. Para plugar vídeo nos outros módulos,
-basta adicionar um campo `video` (caminho do `.mp4` ou URL) na aula em `COURSE[].lessons[]`.
-O player detecta o campo automaticamente (`renderVideoStage`): com `video` mostra o
-`<video controls>`; sem `video` mostra o placeholder "vídeo em breve".
+Para plugar vídeo nos outros módulos, adicione um campo `yt: '<id-do-youtube>'` na aula
+em `COURSE[].lessons[]`. O player detecta automaticamente (`renderVideoStage`): com `yt`
+mostra o embed do YouTube; sem nada mostra o placeholder "vídeo em breve".
+(O campo `video: '<url-.mp4>'` também é suportado, caso queira hospedar fora do YouTube.)
 
 ## Resetar progresso
 
