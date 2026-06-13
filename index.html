@@ -396,6 +396,55 @@
       letter-spacing: 0.02em;
       color: var(--muted);
     }
+
+    /* ── NATIVE PLAYER (YouTube por baixo, UI própria) ─────── */
+    .np { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    .np .np-frame { position: absolute; inset: 0; z-index: 1; }
+    .np iframe, .np .np-frame > div { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .np-poster { position: absolute; inset: 0; z-index: 3; background-size: cover; background-position: center; }
+    .np.started .np-poster { display: none; }
+    .np-click { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
+    .np-spinner {
+      position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px;
+      border: 4px solid rgba(255,255,255,0.18); border-top-color: var(--orange); border-radius: 50%;
+      animation: spin 0.8s linear infinite; z-index: 4; display: none;
+    }
+    .np.loading .np-spinner { display: block; }
+    .np.loading.playing .np-spinner { display: block; }
+    .np-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 84px; height: 84px; border-radius: 50%; background: var(--orange); color: var(--black);
+      display: flex; align-items: center; justify-content: center; z-index: 5; cursor: pointer;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.45); transition: transform 0.2s, opacity 0.25s;
+    }
+    .np-center:hover { transform: translate(-50%,-50%) scale(1.08); }
+    .np.playing .np-center { opacity: 0; pointer-events: none; }
+    .np.loading:not(.started) .np-center { opacity: 0; pointer-events: none; }
+    .np-bar {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0));
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .np.hidebar.playing .np-bar { opacity: 0; transform: translateY(10px); pointer-events: none; }
+    .np-btn { background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 6px; transition: color 0.2s; }
+    .np-btn:hover { color: var(--orange); }
+    .np-seek {
+      flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+      background: rgba(255,255,255,0.25); border-radius: 9999px; cursor: pointer; outline: none;
+    }
+    .np-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--orange); cursor: pointer; }
+    .np-seek::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--orange); cursor: pointer; }
+    .np-time { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: -0.02em; color: #fff; min-width: 92px; text-align: center; }
+    .np-rate { background: transparent; color: #fff; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: -0.02em; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color 0.2s; min-width: 34px; }
+    .np-rate:hover { color: var(--orange); }
+    .np:fullscreen { width: 100vw; height: 100vh; }
+    .np:fullscreen .np-frame { inset: 0; }
+    @media (max-width: 620px) {
+      .np-rate { display: none; }
+      .np-time { min-width: 78px; font-size: 10px; }
+    }
+
     .player-info { padding: 26px 30px 30px; }
     .player-eyebrow {
       font-family: 'Space Mono', monospace;
@@ -930,12 +979,8 @@
   function renderVideoStage(l) {
     const stage = $('playerVideo');
     if (l.yt) {
-      stage.innerHTML = `<iframe
-        src="https://www.youtube-nocookie.com/embed/${l.yt}?rel=0&modestbranding=1"
-        title="${l.name}"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
-        style="position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;"></iframe>`;
+      buildNativePlayer(l, stage);
+      return;
     } else if (l.video) {
       const src = l.video.split('/').map(encodeURIComponent).join('/');
       const poster = encodeURI(l.thumb);
@@ -954,6 +999,174 @@
           <div class="player-video-note">Vídeo desta aula em breve</div>
         </div>`;
     }
+  }
+
+  /* ── Player nativo sobre o YouTube (UI própria) ── */
+  const NP_ICON = {
+    play:  '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>',
+    pause: '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>',
+    vol:   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>',
+    mute:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>',
+    fs:    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg>',
+  };
+  const NP_RATES = [1, 1.25, 1.5, 2];
+  let np = { player: null, lesson: null, tick: null, barTimer: null, rateIdx: 0 };
+
+  function ytAPIReady() {
+    return new Promise((res) => {
+      if (window.YT && window.YT.Player) return res();
+      (window.__ytCbs = window.__ytCbs || []).push(res);
+      if (!window.__ytLoading) {
+        window.__ytLoading = true;
+        const prev = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => { prev && prev(); (window.__ytCbs || []).forEach((f) => f()); window.__ytCbs = []; };
+        const s = document.createElement('script');
+        s.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(s);
+      }
+    });
+  }
+
+  function npFmt(t) {
+    t = Math.max(0, Math.floor(t || 0));
+    const m = Math.floor(t / 60), s = t % 60;
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function destroyNP() {
+    if (np.tick) { clearInterval(np.tick); np.tick = null; }
+    if (np.barTimer) { clearTimeout(np.barTimer); np.barTimer = null; }
+    if (np.player && np.player.destroy) { try { np.player.destroy(); } catch (e) {} }
+    np.player = null; np.lesson = null;
+  }
+
+  async function buildNativePlayer(l, stage) {
+    destroyNP();
+    np.rateIdx = 0;
+    stage.innerHTML = `
+      <div class="np loading" id="np">
+        <div class="np-frame"><div id="ytmount"></div></div>
+        <div class="np-poster" style="background-image:url('${encodeURI(l.thumb)}')"></div>
+        <div class="np-click" id="npClick"></div>
+        <div class="np-spinner"></div>
+        <button class="np-center" id="npCenter" aria-label="Reproduzir">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+        </button>
+        <div class="np-bar" id="npBar">
+          <button class="np-btn" id="npPlay" aria-label="Play/Pause">${NP_ICON.play}</button>
+          <span class="np-time" id="npTime">0:00 / 0:00</span>
+          <input class="np-seek" id="npSeek" type="range" min="0" max="1000" value="0" aria-label="Progresso" />
+          <button class="np-rate" id="npRate" aria-label="Velocidade">1x</button>
+          <button class="np-btn" id="npMute" aria-label="Volume">${NP_ICON.vol}</button>
+          <button class="np-btn" id="npFs" aria-label="Tela cheia">${NP_ICON.fs}</button>
+        </div>
+      </div>`;
+
+    await ytAPIReady();
+    if (currentId !== l.id) return; // usuário trocou de aula durante o carregamento
+    np.lesson = l;
+    np.player = new YT.Player('ytmount', {
+      videoId: l.yt,
+      playerVars: { controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, playsinline: 1, fs: 0, origin: location.origin },
+      events: { onReady: onNPReady, onStateChange: onNPState },
+    });
+    wireNP();
+  }
+
+  function onNPReady() {
+    const el = document.getElementById('np');
+    if (el) el.classList.remove('loading');
+    npUpdateTime();
+  }
+
+  function onNPState(e) {
+    const el = document.getElementById('np');
+    if (!el || !window.YT) return;
+    const S = YT.PlayerState;
+    if (e.data === S.PLAYING) {
+      el.classList.add('playing', 'started'); el.classList.remove('loading');
+      setPlayIcon(true); npStartTick(); npArmHideBar();
+    } else if (e.data === S.PAUSED) {
+      el.classList.remove('playing'); setPlayIcon(false); npShowBar(); npStopTick();
+    } else if (e.data === S.BUFFERING) {
+      el.classList.add('loading');
+    } else if (e.data === S.ENDED) {
+      el.classList.remove('playing', 'loading'); setPlayIcon(false); npShowBar(); npStopTick();
+      const l = np.lesson;
+      if (l && !done.has(l.id)) toggleDone(l.id); // marca concluída + avança
+    }
+    if (e.data !== S.BUFFERING) el.classList.remove('loading');
+  }
+
+  function setPlayIcon(playing) {
+    const b = document.getElementById('npPlay');
+    if (b) b.innerHTML = playing ? NP_ICON.pause : NP_ICON.play;
+  }
+
+  function npStartTick() { npStopTick(); np.tick = setInterval(npUpdateTime, 250); }
+  function npStopTick() { if (np.tick) { clearInterval(np.tick); np.tick = null; } }
+
+  function npUpdateTime() {
+    const p = np.player; if (!p || !p.getDuration) return;
+    const d = p.getDuration() || 0, c = p.getCurrentTime() || 0;
+    const t = document.getElementById('npTime'); if (t) t.textContent = npFmt(c) + ' / ' + npFmt(d);
+    const seek = document.getElementById('npSeek');
+    if (seek && !seek.dataset.drag) {
+      const v = d ? Math.round((c / d) * 1000) : 0;
+      seek.value = v;
+      seek.style.background = `linear-gradient(to right, var(--orange) ${v / 10}%, rgba(255,255,255,0.25) ${v / 10}%)`;
+    }
+  }
+
+  function npShowBar() { const el = document.getElementById('np'); if (el) el.classList.remove('hidebar'); }
+  function npArmHideBar() {
+    if (np.barTimer) clearTimeout(np.barTimer);
+    np.barTimer = setTimeout(() => { const el = document.getElementById('np'); if (el && el.classList.contains('playing')) el.classList.add('hidebar'); }, 2600);
+  }
+
+  function wireNP() {
+    const el = document.getElementById('np');
+    const toggle = () => {
+      const p = np.player; if (!p || !p.getPlayerState) return;
+      if (p.getPlayerState() === YT.PlayerState.PLAYING) p.pauseVideo(); else p.playVideo();
+    };
+    document.getElementById('npClick').onclick = toggle;
+    document.getElementById('npCenter').onclick = toggle;
+    document.getElementById('npPlay').onclick = toggle;
+
+    const seek = document.getElementById('npSeek');
+    seek.addEventListener('input', () => {
+      seek.dataset.drag = '1';
+      const d = (np.player && np.player.getDuration()) || 0, t = d * (seek.value / 1000);
+      const tl = document.getElementById('npTime'); if (tl) tl.textContent = npFmt(t) + ' / ' + npFmt(d);
+      seek.style.background = `linear-gradient(to right, var(--orange) ${seek.value / 10}%, rgba(255,255,255,0.25) ${seek.value / 10}%)`;
+    });
+    seek.addEventListener('change', () => {
+      const d = (np.player && np.player.getDuration()) || 0;
+      if (np.player) np.player.seekTo(d * (seek.value / 1000), true);
+      delete seek.dataset.drag;
+    });
+
+    const rate = document.getElementById('npRate');
+    rate.onclick = () => {
+      np.rateIdx = (np.rateIdx + 1) % NP_RATES.length;
+      if (np.player) np.player.setPlaybackRate(NP_RATES[np.rateIdx]);
+      rate.textContent = NP_RATES[np.rateIdx] + 'x';
+    };
+
+    const mute = document.getElementById('npMute');
+    mute.onclick = () => {
+      const p = np.player; if (!p) return;
+      if (p.isMuted()) { p.unMute(); mute.innerHTML = NP_ICON.vol; } else { p.mute(); mute.innerHTML = NP_ICON.mute; }
+    };
+
+    document.getElementById('npFs').onclick = () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    };
+
+    el.addEventListener('mousemove', () => { npShowBar(); npArmHideBar(); });
   }
 
   function renderPlayer() {
@@ -1035,6 +1248,7 @@
      NAV / UTIL
   ════════════════════════════════════════════════════════ */
   function showView(name) {
+    if (name !== 'player') destroyNP(); // para o vídeo/áudio ao sair da aula
     document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
     $(name + 'View').classList.add('active');
     if (name === 'dash') renderDashboard();
