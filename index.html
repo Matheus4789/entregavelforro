@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área de Membros · Entre no Forró</title>
-  <meta name="description" content="Área de membros do curso Entre no Forró — Forró Sem Parede. Acesse os módulos, aulas e bônus." />
+  <meta name="description"
+    content="Área de membros do curso Entre no Forró — Forró Sem Parede. Acesse os módulos, aulas e bônus." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    ::selection { background: #000; color: #FF4D00; }
+    ::selection {
+      background: #000;
+      color: #FF4D00;
+    }
 
     :root {
       --orange: #FF4D00;
       --black: #000000;
       --white: #FFFFFF;
       --ink: #0d0d0d;
-      --muted: rgba(255,255,255,0.55);
-      --line: rgba(255,255,255,0.12);
+      --muted: rgba(255, 255, 255, 0.55);
+      --line: rgba(255, 255, 255, 0.12);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--ink);
@@ -34,9 +49,19 @@
       overflow-x: hidden;
     }
 
-    img { display: block; }
-    button { font-family: inherit; cursor: pointer; border: none; }
-    a { color: inherit; }
+    img {
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+    }
+
+    a {
+      color: inherit;
+    }
 
     /* ── BANDEIRINHAS ─────────────────────────────────────── */
     .bunting {
@@ -46,17 +71,33 @@
       height: 24px;
       line-height: 0;
     }
+
     .bunting i {
       width: 36px;
       height: 22px;
       flex: 0 0 auto;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
-    .bunting i:nth-child(5n+1) { background: #E63946; }
-    .bunting i:nth-child(5n+2) { background: #FFD23F; }
-    .bunting i:nth-child(5n+3) { background: #2A9D8F; }
-    .bunting i:nth-child(5n+4) { background: #3A86FF; }
-    .bunting i:nth-child(5n+5) { background: #F72585; }
+
+    .bunting i:nth-child(5n+1) {
+      background: #E63946;
+    }
+
+    .bunting i:nth-child(5n+2) {
+      background: #FFD23F;
+    }
+
+    .bunting i:nth-child(5n+3) {
+      background: #2A9D8F;
+    }
+
+    .bunting i:nth-child(5n+4) {
+      background: #3A86FF;
+    }
+
+    .bunting i:nth-child(5n+5) {
+      background: #F72585;
+    }
 
     .mono {
       font-family: 'Space Mono', monospace;
@@ -64,6 +105,7 @@
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
+
     .display {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -74,8 +116,15 @@
     /* ═══════════════════════════════════════════════════════
        APP SHELL
     ═══════════════════════════════════════════════════════ */
-    .app { display: none; min-height: 100vh; flex-direction: column; }
-    .app.active { display: flex; }
+    .app {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .app.active {
+      display: flex;
+    }
 
     .topbar {
       position: sticky;
@@ -84,6 +133,7 @@
       background: var(--black);
       border-bottom: 1px solid var(--line);
     }
+
     .topbar-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -92,16 +142,32 @@
       justify-content: space-between;
       padding: 14px 24px;
     }
-    .topbar-logo { height: 36px; cursor: pointer; }
-    .topbar-right { display: flex; align-items: center; gap: 18px; }
-    .topbar-progress { display: flex; align-items: center; gap: 12px; }
+
+    .topbar-logo {
+      height: 36px;
+      cursor: pointer;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .topbar-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .topbar-progress-bar {
       width: 120px;
       height: 7px;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 9999px;
       overflow: hidden;
     }
+
     .topbar-progress-fill {
       height: 100%;
       width: 0%;
@@ -109,12 +175,40 @@
       border-radius: 9999px;
       transition: width 0.5s ease;
     }
-    .topbar-progress-label { font-size: 10px; color: var(--muted); }
-    .main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 24px 80px; }
 
-    .view { display: none; }
-    .view.active { display: block; animation: fade 0.35s ease; }
-    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .topbar-progress-label {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+      animation: fade 0.35s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* ── DASHBOARD HERO ──────────────────────────────────── */
     .dash-hero {
@@ -124,7 +218,12 @@
       margin: 0 -24px 40px;
       padding: 44px 40px 40px;
     }
-    .dash-hero-inner { max-width: 1152px; margin: 0 auto; }
+
+    .dash-hero-inner {
+      max-width: 1152px;
+      margin: 0 auto;
+    }
+
     .dash-eyebrow {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -133,6 +232,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 12px;
     }
+
     .dash-greeting {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -141,7 +241,13 @@
       font-size: clamp(30px, 5vw, 58px);
       margin-bottom: 22px;
     }
-    .dash-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .dash-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
     .dash-stat {
       background: var(--black);
       color: var(--white);
@@ -149,8 +255,18 @@
       padding: 16px 22px;
       min-width: 130px;
     }
-    .dash-stat-num { font-family: 'Archivo Black', sans-serif; font-size: 30px; letter-spacing: -0.04em; line-height: 1; }
-    .dash-stat-num .orange { color: var(--orange); }
+
+    .dash-stat-num {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 30px;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .dash-stat-num .orange {
+      color: var(--orange);
+    }
+
     .dash-stat-label {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -172,8 +288,21 @@
       overflow: hidden;
       margin-bottom: 48px;
     }
-    .continue-img { width: 100%; height: 100%; min-height: 170px; object-fit: cover; }
-    .continue-body { padding: 28px 30px; display: flex; flex-direction: column; justify-content: center; }
+
+    .continue-img {
+      width: 100%;
+      height: 100%;
+      min-height: 170px;
+      object-fit: cover;
+    }
+
+    .continue-body {
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .continue-tag {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -183,6 +312,7 @@
       color: var(--orange);
       margin-bottom: 10px;
     }
+
     .continue-title {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -191,7 +321,13 @@
       line-height: 1;
       margin-bottom: 6px;
     }
-    .continue-meta { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+    .continue-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
     .btn-primary {
       align-self: flex-start;
       background: var(--orange);
@@ -207,7 +343,11 @@
       gap: 10px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,77,0,0.28); }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(255, 77, 0, 0.28);
+    }
 
     /* ── SECTION HEADERS ─────────────────────────────────── */
     .section-head {
@@ -218,6 +358,7 @@
       border-bottom: 1px solid var(--line);
       margin-bottom: 28px;
     }
+
     .section-head h2 {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -225,6 +366,7 @@
       font-size: clamp(22px, 3vw, 36px);
       line-height: 0.95;
     }
+
     .section-head .count {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -241,6 +383,7 @@
       gap: 18px;
       margin-bottom: 56px;
     }
+
     .module-card {
       background: var(--black);
       border: 1px solid var(--line);
@@ -251,17 +394,40 @@
       display: flex;
       flex-direction: column;
     }
-    .module-card:hover { transform: translateY(-5px); border-color: var(--orange); }
-    .module-thumb-wrap { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
-    .module-thumb { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-    .module-card:hover .module-thumb { transform: scale(1.05); }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--orange);
+    }
+
+    .module-thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+
+    .module-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .module-card:hover .module-thumb {
+      transform: scale(1.05);
+    }
+
     .module-thumb-wrap::after {
       content: "";
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0) 55%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0) 55%);
     }
+
     .module-index {
-      position: absolute; top: 12px; left: 12px;
+      position: absolute;
+      top: 12px;
+      left: 12px;
       font-family: 'Space Mono', monospace;
       font-weight: 700;
       font-size: 11px;
@@ -271,18 +437,33 @@
       border-radius: 9999px;
       z-index: 2;
     }
+
     .module-done-badge {
-      position: absolute; top: 12px; right: 12px;
-      width: 26px; height: 26px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 26px;
+      height: 26px;
       background: var(--orange);
       color: var(--black);
       border-radius: 50%;
       display: none;
-      align-items: center; justify-content: center;
+      align-items: center;
+      justify-content: center;
       z-index: 2;
     }
-    .module-card.complete .module-done-badge { display: flex; }
-    .module-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .module-card.complete .module-done-badge {
+      display: flex;
+    }
+
+    .module-body {
+      padding: 18px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
     .module-title {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -291,8 +472,21 @@
       line-height: 1;
       margin-bottom: 6px;
     }
-    .module-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; flex: 1; }
-    .module-foot { display: flex; align-items: center; justify-content: space-between; }
+
+    .module-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .module-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .module-lessons-count {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -301,12 +495,34 @@
       letter-spacing: -0.02em;
       color: var(--muted);
     }
-    .module-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; margin-top: 14px; }
-    .module-bar-fill { height: 100%; width: 0%; background: var(--orange); border-radius: 9999px; transition: width 0.5s; }
-    .module-arrow { color: var(--orange); }
+
+    .module-bar {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .module-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--orange);
+      border-radius: 9999px;
+      transition: width 0.5s;
+    }
+
+    .module-arrow {
+      color: var(--orange);
+    }
 
     /* ── BONUS GRID ──────────────────────────────────────── */
-    .bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
     .bonus-card {
       background: var(--black);
       border: 1px solid var(--line);
@@ -317,17 +533,37 @@
       align-items: flex-start;
       transition: border-color 0.25s, transform 0.25s;
     }
-    .bonus-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+
+    .bonus-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+
     .bonus-icon {
       flex-shrink: 0;
-      width: 42px; height: 42px;
+      width: 42px;
+      height: 42px;
       border-radius: 11px;
-      background: rgba(255,77,0,0.12);
+      background: rgba(255, 77, 0, 0.12);
       color: var(--orange);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .bonus-info h3 { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 5px; }
-    .bonus-info p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+    .bonus-info h3 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 5px;
+    }
+
+    .bonus-info p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     .bonus-pill {
       display: inline-block;
       margin-top: 10px;
@@ -337,168 +573,629 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       color: var(--orange);
-      border: 1px solid rgba(255,77,0,0.35);
+      border: 1px solid rgba(255, 77, 0, 0.35);
       padding: 3px 9px;
       border-radius: 9999px;
     }
-    .bonus-card { text-align: left; cursor: pointer; }
+
+    .bonus-card {
+      text-align: left;
+      cursor: pointer;
+    }
 
     /* ── BONUS DETAIL ────────────────────────────────────── */
-    .bonus-detail { max-width: 820px; margin: 0 auto; }
-    .bd-head { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+    .bonus-detail {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .bd-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
     .bd-icon {
-      flex-shrink: 0; width: 54px; height: 54px; border-radius: 14px;
-      background: rgba(255,77,0,0.12); color: var(--orange);
-      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: rgba(255, 77, 0, 0.12);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .bd-tag {
-      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10px;
-      text-transform: uppercase; letter-spacing: 0.02em; color: var(--orange);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--orange);
     }
+
     .bd-title {
-      font-family: 'Archivo Black', sans-serif; text-transform: uppercase;
-      letter-spacing: -0.04em; line-height: 0.95; font-size: clamp(26px, 4vw, 44px);
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      font-size: clamp(26px, 4vw, 44px);
     }
-    .bd-intro { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 18px 0 30px; }
-    .bd-section { margin-bottom: 26px; }
+
+    .bd-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 18px 0 30px;
+    }
+
+    .bd-section {
+      margin-bottom: 26px;
+    }
+
     .bd-section h3 {
-      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px;
-      text-transform: uppercase; letter-spacing: -0.02em; color: var(--white);
-      padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 14px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
     }
-    .bd-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .bd-list li { display: flex; gap: 12px; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.85); }
-    .bd-list li svg { flex-shrink: 0; color: var(--orange); margin-top: 3px; }
+
+    .bd-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bd-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .bd-list li svg {
+      flex-shrink: 0;
+      color: var(--orange);
+      margin-top: 3px;
+    }
 
     /* checklist */
-    .bd-check { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .bd-check {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .bd-check li {
-      display: flex; align-items: center; gap: 14px; padding: 14px 16px;
-      background: var(--black); border: 1px solid var(--line); border-radius: 12px;
-      cursor: pointer; transition: border-color 0.2s; font-size: 15px; color: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.9);
     }
-    .bd-check li:hover { border-color: var(--orange); }
+
+    .bd-check li:hover {
+      border-color: var(--orange);
+    }
+
     .bd-check li .ck {
-      flex-shrink: 0; width: 24px; height: 24px; border-radius: 7px;
-      border: 2px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; color: transparent;
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
     }
-    .bd-check li.on .ck { background: var(--orange); border-color: var(--orange); color: var(--black); }
-    .bd-check li.on { color: rgba(255,255,255,0.5); text-decoration: line-through; }
+
+    .bd-check li.on .ck {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--black);
+    }
+
+    .bd-check li.on {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: line-through;
+    }
 
     /* playlist / lista de músicas e links */
-    .bd-rows { display: flex; flex-direction: column; gap: 8px; }
-    .bd-row {
-      display: flex; align-items: center; gap: 14px; padding: 13px 16px;
-      background: var(--black); border: 1px solid var(--line); border-radius: 12px;
-      text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+    .bd-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .bd-row:hover { border-color: var(--orange); transform: translateY(-2px); }
-    .bd-row-num { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; color: var(--orange); min-width: 22px; }
-    .bd-row-main { flex: 1; min-width: 0; }
-    .bd-row-title { font-size: 15px; font-weight: 600; color: var(--white); }
-    .bd-row-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
-    .bd-row-go { color: var(--muted); flex-shrink: 0; }
-    .bd-row:hover .bd-row-go { color: var(--orange); }
+
+    .bd-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 16px;
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .bd-row:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .bd-row-num {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--orange);
+      min-width: 22px;
+    }
+
+    .bd-row-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .bd-row-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .bd-row-sub {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .bd-row-go {
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .bd-row:hover .bd-row-go {
+      color: var(--orange);
+    }
 
     .bd-cta {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: var(--orange); color: var(--black);
-      font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.03em;
-      font-size: 16px; padding: 16px 30px; border-radius: 9999px; text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 16px;
+      padding: 16px 30px;
+      border-radius: 9999px;
+      text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .bd-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,77,0,0.3); }
-    .bd-note {
-      margin-top: 18px; padding: 14px 16px; border-left: 3px solid var(--orange);
-      background: rgba(255,255,255,0.03); font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7);
+
+    .bd-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 77, 0, 0.3);
     }
-    .bd-video { position: relative; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+
+    .bd-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--orange);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .bd-video {
+      position: relative;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
 
     /* conteúdo sendo gerado */
-    .bd-soon { text-align: center; padding: 56px 24px; border: 1px dashed rgba(255,255,255,0.18); border-radius: 18px; background: rgba(255,255,255,0.02); }
-    .bd-soon-icon {
-      width: 66px; height: 66px; margin: 0 auto 20px; border-radius: 50%;
-      background: rgba(255,77,0,0.12); color: var(--orange);
-      display: flex; align-items: center; justify-content: center;
+    .bd-soon {
+      text-align: center;
+      padding: 56px 24px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
     }
-    .bd-soon-icon svg { animation: spin 2.6s linear infinite; }
-    .bd-soon-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.03em; font-size: 22px; margin-bottom: 10px; }
-    .bd-soon-text { font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 420px; margin: 0 auto; }
-    .bd-soon-dots::after { content: ''; animation: bdDots 1.5s steps(1, end) infinite; }
-    @keyframes bdDots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
 
-    .bonus-pill.pending { color: var(--muted); border-color: var(--line); }
+    .bd-soon-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: rgba(255, 77, 0, 0.12);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bd-soon-icon svg {
+      animation: spin 2.6s linear infinite;
+    }
+
+    .bd-soon-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .bd-soon-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .bd-soon-dots::after {
+      content: '';
+      animation: bdDots 1.5s steps(1, end) infinite;
+    }
+
+    @keyframes bdDots {
+      0% {
+        content: '';
+      }
+
+      25% {
+        content: '.';
+      }
+
+      50% {
+        content: '..';
+      }
+
+      75% {
+        content: '...';
+      }
+    }
+
+    .bonus-pill.pending {
+      color: var(--muted);
+      border-color: var(--line);
+    }
 
     /* ── OFERTAS (cards no dashboard) ────────────────────── */
-    .offers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
     .offer-card {
-      text-align: left; cursor: pointer; position: relative; overflow: hidden;
-      background: var(--orange); color: var(--black);
-      border: 2px solid var(--black); border-radius: 16px; padding: 22px 22px 18px;
-      display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background: var(--orange);
+      color: var(--black);
+      border: 2px solid var(--black);
+      border-radius: 16px;
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .offer-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+
+    .offer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
     .offer-badge {
-      align-self: flex-start; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 9px;
-      text-transform: uppercase; letter-spacing: 0.04em; color: var(--orange); background: var(--black);
-      padding: 4px 11px; border-radius: 9999px; margin-bottom: 14px;
+      align-self: flex-start;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--orange);
+      background: var(--black);
+      padding: 4px 11px;
+      border-radius: 9999px;
+      margin-bottom: 14px;
     }
-    .offer-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.03em; font-size: 21px; line-height: 1; margin-bottom: 8px; }
-    .offer-desc { font-size: 13.5px; line-height: 1.5; color: rgba(0,0,0,0.7); margin-bottom: 18px; flex: 1; }
-    .offer-foot { display: flex; align-items: center; justify-content: space-between; }
-    .offer-price { font-family: 'Archivo Black', sans-serif; font-size: 22px; letter-spacing: -0.03em; }
-    .offer-old { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; text-decoration: line-through; color: rgba(0,0,0,0.45); margin-right: 4px; }
-    .offer-lock, .offer-access {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: -0.02em;
-      background: var(--black); color: var(--orange); padding: 7px 12px; border-radius: 9999px;
+
+    .offer-title {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      font-size: 21px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .offer-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 18px;
+      flex: 1;
+    }
+
+    .offer-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .offer-price {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .offer-old {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: line-through;
+      color: rgba(0, 0, 0, 0.45);
+      margin-right: 4px;
+    }
+
+    .offer-lock,
+    .offer-access {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      background: var(--black);
+      color: var(--orange);
+      padding: 7px 12px;
+      border-radius: 9999px;
     }
 
     /* ── TELA DE COMPRA / DESBLOQUEIO ────────────────────── */
-    .buygate { background: var(--black); border: 1px solid var(--line); border-radius: 18px; padding: 30px; text-align: center; }
-    .buygate-price { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 6px; }
-    .buygate-old { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 16px; text-decoration: line-through; color: var(--muted); }
-    .buygate-now { font-family: 'Archivo Black', sans-serif; font-size: 44px; letter-spacing: -0.04em; color: var(--orange); }
-    .buygate-list { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
-    .buygate-code { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
-    .buygate-code-label { display: block; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 12px; }
-    .buygate-code-row { display: flex; gap: 10px; max-width: 380px; margin: 0 auto; }
-    .buygate-code-row input {
-      flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 10px;
-      padding: 12px 14px; color: var(--white); font-size: 14px; font-family: 'Inter', sans-serif; text-align: center; text-transform: uppercase;
+    .buygate {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+      text-align: center;
     }
-    .buygate-code-row input:focus { outline: none; border-color: var(--orange); }
-    .buygate-err { display: block; color: #ff6b4a; font-size: 12px; margin-top: 10px; min-height: 14px; }
+
+    .buygate-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .buygate-old {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .buygate-now {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 44px;
+      letter-spacing: -0.04em;
+      color: var(--orange);
+    }
+
+    .buygate-list {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .buygate-code {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .buygate-code-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .buygate-code-row {
+      display: flex;
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .buygate-code-row input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .buygate-code-row input:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .buygate-err {
+      display: block;
+      color: #ff6b4a;
+      font-size: 12px;
+      margin-top: 10px;
+      min-height: 14px;
+    }
 
     /* ── LISTA MÚSICA + PASSOS ───────────────────────────── */
-    .song-list { display: flex; flex-direction: column; gap: 10px; }
-    .song-row { background: var(--black); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; transition: border-color 0.2s; }
-    .song-row:hover { border-color: rgba(255,77,0,0.4); }
-    .song-top { display: flex; align-items: center; gap: 14px; }
-    .song-num { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; color: var(--orange); min-width: 22px; }
-    .song-main { flex: 1; min-width: 0; text-decoration: none; }
-    .song-title { display: block; font-size: 15px; font-weight: 600; color: var(--white); }
-    .song-main:hover .song-title { color: var(--orange); }
-    .song-sub { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
-    .song-feel { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 9999px; flex-shrink: 0; }
-    .feel-lento { background: rgba(58,134,255,0.15); color: #6ea8ff; }
-    .feel-médio { background: rgba(255,210,63,0.15); color: #ffd23f; }
-    .feel-acelerado { background: rgba(247,37,133,0.15); color: #ff5fa2; }
-    .song-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-left: 36px; }
-    .step-tag {
-      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: -0.02em;
-      color: var(--orange); background: rgba(255,77,0,0.1); border: 1px solid rgba(255,77,0,0.3);
-      padding: 5px 11px; border-radius: 9999px; cursor: pointer; transition: background 0.2s, color 0.2s;
+    .song-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .step-tag:hover { background: var(--orange); color: var(--black); }
-    .step-tag.static { color: var(--muted); background: rgba(255,255,255,0.04); border-color: var(--line); cursor: default; }
+
+    .song-row {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .song-row:hover {
+      border-color: rgba(255, 77, 0, 0.4);
+    }
+
+    .song-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .song-num {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--orange);
+      min-width: 22px;
+    }
+
+    .song-main {
+      flex: 1;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .song-title {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .song-main:hover .song-title {
+      color: var(--orange);
+    }
+
+    .song-sub {
+      display: block;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .song-feel {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      flex-shrink: 0;
+    }
+
+    .feel-lento {
+      background: rgba(58, 134, 255, 0.15);
+      color: #6ea8ff;
+    }
+
+    .feel-médio {
+      background: rgba(255, 210, 63, 0.15);
+      color: #ffd23f;
+    }
+
+    .feel-acelerado {
+      background: rgba(247, 37, 133, 0.15);
+      color: #ff5fa2;
+    }
+
+    .song-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      padding-left: 36px;
+    }
+
+    .step-tag {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--orange);
+      background: rgba(255, 77, 0, 0.1);
+      border: 1px solid rgba(255, 77, 0, 0.3);
+      padding: 5px 11px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .step-tag:hover {
+      background: var(--orange);
+      color: var(--black);
+    }
+
+    .step-tag.static {
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--line);
+      cursor: default;
+    }
 
     /* ═══════════════════════════════════════════════════════
        LESSON PLAYER VIEW
     ═══════════════════════════════════════════════════════ */
-    .player-top { padding: 26px 0 22px; }
+    .player-top {
+      padding: 26px 0 22px;
+    }
+
     .back-link {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: transparent;
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -508,9 +1205,17 @@
       color: var(--muted);
       transition: color 0.2s;
     }
-    .back-link:hover { color: var(--orange); }
 
-    .player-layout { display: grid; grid-template-columns: 1fr 360px; gap: 28px; align-items: start; }
+    .back-link:hover {
+      color: var(--orange);
+    }
+
+    .player-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 28px;
+      align-items: start;
+    }
 
     .player-stage {
       background: var(--black);
@@ -518,6 +1223,7 @@
       border-radius: 18px;
       overflow: hidden;
     }
+
     .player-video {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -527,18 +1233,40 @@
       justify-content: center;
       overflow: hidden;
     }
-    .player-video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
-    .player-video-overlay { position: relative; z-index: 2; text-align: center; padding: 24px; }
+
+    .player-video img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    .player-video-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+    }
+
     .player-play {
-      width: 76px; height: 76px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: var(--orange);
       color: var(--black);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 16px;
       transition: transform 0.2s;
     }
-    .player-play:hover { transform: scale(1.08); }
+
+    .player-play:hover {
+      transform: scale(1.08);
+    }
+
     .player-video-note {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -551,57 +1279,223 @@
     /* ── NATIVE PLAYER (YouTube por baixo, UI própria) ─────── */
     /* --np-zoom: amplia o quadro p/ recortar título/logo/marca-d'água do YouTube
        nas bordas. Aumente se ainda aparecer algo; diminua se cortar demais a imagem. */
-    .np { position: absolute; inset: 0; background: #000; overflow: hidden; --np-zoom: 1.34; }
-    .np .np-frame {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      transform: scale(var(--np-zoom)); transform-origin: center center;
-    }
-    .np iframe, .np .np-frame > div { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .np-poster { position: absolute; inset: 0; z-index: 3; background-size: cover; background-position: center; }
-    .np.started .np-poster { display: none; }
-    .np-click { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
-    .np-spinner {
-      position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px;
-      border: 4px solid rgba(255,255,255,0.18); border-top-color: var(--orange); border-radius: 50%;
-      animation: spin 0.8s linear infinite; z-index: 4; display: none;
-    }
-    .np.loading .np-spinner { display: block; }
-    .np.loading.playing .np-spinner { display: block; }
-    .np-center {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 84px; height: 84px; border-radius: 50%; background: var(--orange); color: var(--black);
-      display: flex; align-items: center; justify-content: center; z-index: 5; cursor: pointer;
-      box-shadow: 0 12px 34px rgba(0,0,0,0.45); transition: transform 0.2s, opacity 0.25s;
-    }
-    .np-center:hover { transform: translate(-50%,-50%) scale(1.08); }
-    .np.playing .np-center { opacity: 0; pointer-events: none; }
-    .np.loading:not(.started) .np-center { opacity: 0; pointer-events: none; }
-    .np-bar {
-      position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
-      display: flex; align-items: center; gap: 12px; padding: 12px 16px 14px;
-      background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0));
-      transition: opacity 0.25s, transform 0.25s;
-    }
-    .np.hidebar.playing .np-bar { opacity: 0; transform: translateY(10px); pointer-events: none; }
-    .np-btn { background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 6px; transition: color 0.2s; }
-    .np-btn:hover { color: var(--orange); }
-    .np-seek {
-      flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
-      background: rgba(255,255,255,0.25); border-radius: 9999px; cursor: pointer; outline: none;
-    }
-    .np-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--orange); cursor: pointer; }
-    .np-seek::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--orange); cursor: pointer; }
-    .np-time { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: -0.02em; color: #fff; min-width: 92px; text-align: center; }
-    .np-rate { background: transparent; color: #fff; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: -0.02em; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color 0.2s; min-width: 34px; }
-    .np-rate:hover { color: var(--orange); }
-    .np:fullscreen { width: 100vw; height: 100vh; }
-    .np:fullscreen .np-frame { inset: 0; }
-    @media (max-width: 620px) {
-      .np-rate { display: none; }
-      .np-time { min-width: 78px; font-size: 10px; }
+    .np {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      overflow: hidden;
+      --np-zoom: 1.34;
     }
 
-    .player-info { padding: 26px 30px 30px; }
+    .np .np-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      transform: scale(var(--np-zoom));
+      transform-origin: center center;
+    }
+
+    .np iframe,
+    .np .np-frame>div {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .np-poster {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .np.started .np-poster {
+      display: none;
+    }
+
+    .np-click {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .np-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52px;
+      height: 52px;
+      margin: -26px 0 0 -26px;
+      border: 4px solid rgba(255, 255, 255, 0.18);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      z-index: 4;
+      display: none;
+    }
+
+    .np.loading .np-spinner {
+      display: block;
+    }
+
+    .np.loading.playing .np-spinner {
+      display: block;
+    }
+
+    .np-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      cursor: pointer;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s, opacity 0.25s;
+    }
+
+    .np-center:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .np.playing .np-center {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .np.loading:not(.started) .np-center {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .np-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px 14px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0));
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .np.hidebar.playing .np-bar {
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+    }
+
+    .np-btn {
+      background: transparent;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .np-btn:hover {
+      color: var(--orange);
+    }
+
+    .np-seek {
+      flex: 1;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .np-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+    }
+
+    .np-seek::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+    }
+
+    .np-time {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      min-width: 92px;
+      text-align: center;
+    }
+
+    .np-rate {
+      background: transparent;
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: color 0.2s;
+      min-width: 34px;
+    }
+
+    .np-rate:hover {
+      color: var(--orange);
+    }
+
+    .np:fullscreen {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .np:fullscreen .np-frame {
+      inset: 0;
+    }
+
+    @media (max-width: 620px) {
+      .np-rate {
+        display: none;
+      }
+
+      .np-time {
+        min-width: 78px;
+        font-size: 10px;
+      }
+    }
+
+    .player-info {
+      padding: 26px 30px 30px;
+    }
+
     .player-eyebrow {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -611,6 +1505,7 @@
       color: var(--orange);
       margin-bottom: 10px;
     }
+
     .player-title {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -619,8 +1514,22 @@
       line-height: 0.95;
       margin-bottom: 14px;
     }
-    .player-desc { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 620px; margin-bottom: 26px; }
-    .player-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    .player-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 620px;
+      margin-bottom: 26px;
+    }
+
+    .player-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
     .btn-complete {
       background: var(--orange);
       color: var(--black);
@@ -630,11 +1539,22 @@
       font-size: 14px;
       padding: 14px 24px;
       border-radius: 9999px;
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-complete:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,77,0,0.28); }
-    .btn-complete.done { background: rgba(255,255,255,0.08); color: var(--white); }
+
+    .btn-complete:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(255, 77, 0, 0.28);
+    }
+
+    .btn-complete.done {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
     .btn-ghost {
       background: transparent;
       border: 1px solid var(--line);
@@ -646,12 +1566,26 @@
       letter-spacing: -0.02em;
       padding: 13px 20px;
       border-radius: 9999px;
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       transition: border-color 0.2s, color 0.2s;
     }
-    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
-    .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
-    .btn-ghost:disabled:hover { border-color: var(--line); color: var(--white); }
+
+    .btn-ghost:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .btn-ghost:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-ghost:disabled:hover {
+      border-color: var(--line);
+      color: var(--white);
+    }
 
     /* ── PLAYLIST SIDEBAR ────────────────────────────────── */
     .playlist {
@@ -662,7 +1596,12 @@
       position: sticky;
       top: 84px;
     }
-    .playlist-head { padding: 20px 22px; border-bottom: 1px solid var(--line); }
+
+    .playlist-head {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
     .playlist-module {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -672,6 +1611,7 @@
       color: var(--orange);
       margin-bottom: 6px;
     }
+
     .playlist-title {
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
@@ -680,9 +1620,26 @@
       line-height: 1;
       margin-bottom: 14px;
     }
-    .playlist-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; }
-    .playlist-bar-fill { height: 100%; width: 0%; background: var(--orange); transition: width 0.4s; }
-    .playlist-items { max-height: 60vh; overflow-y: auto; }
+
+    .playlist-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .playlist-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--orange);
+      transition: width 0.4s;
+    }
+
+    .playlist-items {
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
     .playlist-item {
       width: 100%;
       display: flex;
@@ -691,22 +1648,45 @@
       padding: 14px 22px;
       background: transparent;
       text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       transition: background 0.2s;
     }
-    .playlist-item:hover { background: rgba(255,255,255,0.04); }
-    .playlist-item.active { background: rgba(255,77,0,0.1); }
-    .playlist-item.active .pl-name { color: var(--orange); }
+
+    .playlist-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .playlist-item.active {
+      background: rgba(255, 77, 0, 0.1);
+    }
+
+    .playlist-item.active .pl-name {
+      color: var(--orange);
+    }
+
     .pl-check {
       flex-shrink: 0;
-      width: 24px; height: 24px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.2);
-      display: flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: transparent;
     }
-    .playlist-item.complete .pl-check { background: var(--orange); border-color: var(--orange); color: var(--black); }
-    .pl-meta { flex: 1; min-width: 0; }
+
+    .playlist-item.complete .pl-check {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--black);
+    }
+
+    .pl-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
     .pl-num {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -715,6 +1695,7 @@
       letter-spacing: 0.02em;
       color: var(--muted);
     }
+
     .pl-name {
       font-size: 14px;
       font-weight: 600;
@@ -724,13 +1705,22 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .pl-playing { flex-shrink: 0; color: var(--orange); display: none; }
-    .playlist-item.active .pl-playing { display: block; }
+
+    .pl-playing {
+      flex-shrink: 0;
+      color: var(--orange);
+      display: none;
+    }
+
+    .playlist-item.active .pl-playing {
+      display: block;
+    }
 
     /* ── TOAST ───────────────────────────────────────────── */
     .toast {
       position: fixed;
-      bottom: 26px; left: 50%;
+      bottom: 26px;
+      left: 50%;
       transform: translateX(-50%) translateY(120px);
       background: var(--orange);
       color: var(--black);
@@ -741,12 +1731,17 @@
       letter-spacing: -0.02em;
       padding: 14px 26px;
       border-radius: 9999px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
       z-index: 200;
-      transition: transform 0.4s cubic-bezier(.2,.9,.3,1.4);
-      display: flex; align-items: center; gap: 10px;
+      transition: transform 0.4s cubic-bezier(.2, .9, .3, 1.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
 
     /* ── FOOTER ──────────────────────────────────────────── */
     .app-foot {
@@ -754,6 +1749,7 @@
       padding: 26px 24px;
       text-align: center;
     }
+
     .app-foot p {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
@@ -762,22 +1758,48 @@
       letter-spacing: -0.02em;
       color: var(--muted);
     }
-    .app-foot a { color: var(--orange); text-decoration: none; }
+
+    .app-foot a {
+      color: var(--orange);
+      text-decoration: none;
+    }
 
     /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 900px) {
-      .player-layout { grid-template-columns: 1fr; }
-      .playlist { position: static; }
-      .playlist-items { max-height: none; }
+      .player-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .playlist {
+        position: static;
+      }
+
+      .playlist-items {
+        max-height: none;
+      }
     }
+
     @media (max-width: 620px) {
-      .topbar-progress { display: none; }
-      .continue { grid-template-columns: 1fr; }
-      .continue-img { min-height: 160px; }
-      .dash-hero { padding: 32px 24px; margin: 0 -24px 32px; }
+      .topbar-progress {
+        display: none;
+      }
+
+      .continue {
+        grid-template-columns: 1fr;
+      }
+
+      .continue-img {
+        min-height: 160px;
+      }
+
+      .dash-hero {
+        padding: 32px 24px;
+        margin: 0 -24px 32px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- ═══════════════════ APP ═══════════════════ -->
@@ -787,7 +1809,9 @@
         <img class="topbar-logo" src="assets/logo_white.png" alt="Entre no Forró" id="homeLogo" />
         <div class="topbar-right">
           <div class="topbar-progress">
-            <div class="topbar-progress-bar"><div class="topbar-progress-fill" id="topProgressFill"></div></div>
+            <div class="topbar-progress-bar">
+              <div class="topbar-progress-fill" id="topProgressFill"></div>
+            </div>
             <span class="topbar-progress-label mono" id="topProgressLabel">0%</span>
           </div>
         </div>
@@ -803,7 +1827,8 @@
             <h1 class="dash-greeting" id="greeting">E aí?</h1>
             <div class="dash-stats">
               <div class="dash-stat">
-                <div class="dash-stat-num"><span id="statDone">0</span><span class="orange" id="statTotal">/18</span></div>
+                <div class="dash-stat-num"><span id="statDone">0</span><span class="orange" id="statTotal">/18</span>
+                </div>
                 <div class="dash-stat-label">Aulas concluídas</div>
               </div>
               <div class="dash-stat">
@@ -851,7 +1876,11 @@
       <section class="view" id="playerView">
         <div class="player-top">
           <button class="back-link" id="backBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
             Voltar aos módulos
           </button>
         </div>
@@ -865,12 +1894,18 @@
               <div class="player-actions">
                 <button class="btn-complete" id="completeBtn"></button>
                 <button class="btn-ghost" id="prevBtn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
                   Anterior
                 </button>
                 <button class="btn-ghost" id="nextBtn">
                   Próxima
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -880,7 +1915,9 @@
             <div class="playlist-head">
               <div class="playlist-module" id="plModule"></div>
               <div class="playlist-title" id="plTitle"></div>
-              <div class="playlist-bar"><div class="playlist-bar-fill" id="plBarFill"></div></div>
+              <div class="playlist-bar">
+                <div class="playlist-bar-fill" id="plBarFill"></div>
+              </div>
             </div>
             <div class="playlist-items" id="plItems"></div>
           </aside>
@@ -891,7 +1928,11 @@
       <section class="view" id="bonusView">
         <div class="player-top">
           <button class="back-link" id="bonusBack">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
             Voltar
           </button>
         </div>
@@ -900,310 +1941,321 @@
     </div>
 
     <footer class="app-foot">
-      <p>© 2026 Entre no Forró · Forró Sem Parede · Dúvidas? <a href="https://instagram.com/teo.arrastape" target="_blank" rel="noopener">@teo.arrastape</a></p>
+      <p>© 2026 Entre no Forró · Forró Sem Parede · Dúvidas? <a href="https://instagram.com/teo.arrastape"
+          target="_blank" rel="noopener">@teo.arrastape</a></p>
     </footer>
   </div>
 
   <div class="toast" id="toast"></div>
 
   <script>
-  /* ════════════════════════════════════════════════════════
-     DADOS DO CURSO
-  ════════════════════════════════════════════════════════ */
-  const COURSE = [
-    {
-      id: 'ini', title: 'Trilha Iniciante', thumb: 'assets/mod1.png',
-      desc: 'Forró do zero, em vídeo: do passo básico aos primeiros giros. Comece por aqui.',
-      lessons: [
-        { id: 'ini01', name: 'Passo Básico',                    thumb: 'assets/mod1.png', yt: 'tW25NPPJNHw',                       desc: 'O dois-pra-lá, dois-pra-cá: o passo que é a base de todo o forró. Devagar, no seu tempo, até virar automático.' },
-        { id: 'ini02', name: 'Abraço',                          thumb: 'assets/aula_postura.png', yt: 'KW4R4tJew-o',                            desc: 'A posição certa dos braços e do abraço pra conduzir e ser conduzida com conforto e segurança.' },
-        { id: 'ini03', name: 'Giro Simples',                    thumb: 'assets/aula_ritmo.png', yt: 'YKN_f-mAOwU',                     desc: 'O primeiro giro: como conduzir e executar a volta sem perder o tempo da música.' },
-        { id: 'ini04', name: 'Chuveirinho',                     thumb: 'assets/mod2.png', yt: '3CjfSBirhKI',                      desc: 'Um clássico do forró: o movimento de braços que enrola e desenrola com leveza.' },
-        { id: 'ini05', name: 'Chave de Braço e Charme da Dama', thumb: 'assets/aula_quadril.png', yt: '1Tm25-p2vDk', desc: 'A chave de braço do condutor e o charme da dama: elegância e conexão no meio do arraiá.' },
-        { id: 'ini06', name: 'Bom Dia + Encaixe',               thumb: 'assets/aula_abraco.png', yt: 'gpmgWUSdSkQ',               desc: 'O passo "bom dia" e o encaixe: transições suaves que dão fluidez à dança.' },
-        { id: 'ini07', name: 'Pião',                            thumb: 'assets/mod3.png', yt: '8Apw1zsRbu4',                            desc: 'O giro contínuo da dama, conduzido com firmeza. O pião que impressiona na pista.' },
-        { id: 'ini08', name: 'Arco-Íris + Giro em Linha',       thumb: 'assets/aula_girolateral.png', yt: 'rO_jVRIk8gI',        desc: 'A combinação do arco-íris com o giro em linha pra deslocar pelo arraiá com estilo.' },
-        { id: 'ini09', name: 'Giro em Linha',                   thumb: 'assets/mod4.png', yt: 'V4OAbAVku2Y',                    desc: 'O giro em linha isolado: deslocamento e condução em linha reta, do jeito certo.' }
-      ]
-    },
-    {
-      id: 'inter', title: 'Trilha Intermediária', thumb: 'assets/mod4.png',
-      desc: 'Subindo de nível: giros compostos, variações e passos que impressionam no arraiá.',
-      lessons: [
-        { id: 'int01', name: 'Manivela + Giro Ninja', thumb: 'assets/mod5.png', yt: 'fQY7DPvwOus', desc: 'A manivela emendada no giro ninja: um combo vistoso que dá fluidez e estilo à condução.' },
-        { id: 'int02', name: 'Rapidinhas (Variações)', thumb: 'assets/mod6.png', yt: 'Omxs4CwmXJQ', desc: 'Pequenas variações rápidas pra você ter mais repertório e nunca repetir o mesmo passo.' },
-        { id: 'int03', name: 'Arco Destro', thumb: 'assets/aula_postura.png', yt: 'dbpcedOzT6w', desc: 'O arco destro: condução de braço elegante que abre espaço pra novas combinações.' },
-        { id: 'int04', name: 'Parafuso', thumb: 'assets/aula_ritmo.png', yt: 'TJ4OE9PKHIw', desc: 'O parafuso: giro encaixado que impressiona quando bem conduzido. Atenção ao tempo.' },
-        { id: 'int05', name: 'Pião Invertido', thumb: 'assets/aula_quadril.png', yt: 'Y8dyNyBzp_Y', desc: 'A versão invertida do pião: mais um truque pra variar o giro contínuo da dama.' },
-        { id: 'int06', name: 'Caminhada Redonda', thumb: 'assets/aula_abraco.png', yt: 'iMjBgPgc1tE', desc: 'A caminhada redonda: deslocamento circular pela pista com leveza e controle.' },
-        { id: 'int07', name: 'Assalto em Linha', thumb: 'assets/aula_girolateral.png', yt: 'VFOwf-Y3KnE', desc: 'O assalto em linha: passo intermediário que combina troca de lado com condução firme.' },
-        { id: 'int08', name: 'Giro Duplo', thumb: 'assets/mod1.png', yt: 'Osu8jcLDtGA', desc: 'O giro duplo: dois giros encadeados na dama, no tempo certo, sem perder o eixo.' }
-      ]
+    /* ════════════════════════════════════════════════════════
+       DADOS DO CURSO
+    ════════════════════════════════════════════════════════ */
+    const COURSE = [
+      {
+        id: 'ini', title: 'Trilha Iniciante', thumb: 'assets/mod1.png',
+        desc: 'Forró do zero, em vídeo: do passo básico aos primeiros giros. Comece por aqui.',
+        lessons: [
+          { id: 'ini01', name: 'Passo Básico', thumb: 'assets/mod1.png', yt: 'tW25NPPJNHw', desc: 'O dois-pra-lá, dois-pra-cá: o passo que é a base de todo o forró. Devagar, no seu tempo, até virar automático.' },
+          { id: 'ini02', name: 'Abraço', thumb: 'assets/aula_postura.png', yt: 'KW4R4tJew-o', desc: 'A posição certa dos braços e do abraço pra conduzir e ser conduzida com conforto e segurança.' },
+          { id: 'ini03', name: 'Giro Simples', thumb: 'assets/aula_ritmo.png', yt: 'YKN_f-mAOwU', desc: 'O primeiro giro: como conduzir e executar a volta sem perder o tempo da música.' },
+          { id: 'ini04', name: 'Chuveirinho', thumb: 'assets/mod2.png', yt: '3CjfSBirhKI', desc: 'Um clássico do forró: o movimento de braços que enrola e desenrola com leveza.' },
+          { id: 'ini05', name: 'Chave de Braço e Charme da Dama', thumb: 'assets/aula_quadril.png', yt: '1Tm25-p2vDk', desc: 'A chave de braço do condutor e o charme da dama: elegância e conexão no meio do São João.' },
+          { id: 'ini06', name: 'Bom Dia + Encaixe', thumb: 'assets/aula_abraco.png', yt: 'gpmgWUSdSkQ', desc: 'O passo "bom dia" e o encaixe: transições suaves que dão fluidez à dança.' },
+          { id: 'ini07', name: 'Pião', thumb: 'assets/mod3.png', yt: '8Apw1zsRbu4', desc: 'O giro contínuo da dama, conduzido com firmeza. O pião que impressiona na pista.' },
+          { id: 'ini08', name: 'Arco-Íris + Giro em Linha', thumb: 'assets/aula_girolateral.png', yt: 'rO_jVRIk8gI', desc: 'A combinação do arco-íris com o giro em linha pra deslocar pela festa de São João com estilo.' },
+          { id: 'ini09', name: 'Giro em Linha', thumb: 'assets/mod4.png', yt: 'V4OAbAVku2Y', desc: 'O giro em linha isolado: deslocamento e condução em linha reta, do jeito certo.' }
+        ]
+      },
+      {
+        id: 'inter', title: 'Trilha Intermediária', thumb: 'assets/mod4.png',
+        desc: 'Subindo de nível: giros compostos, variações e passos que impressionam no São João.',
+        lessons: [
+          { id: 'int01', name: 'Manivela + Giro Ninja', thumb: 'assets/mod5.png', yt: 'fQY7DPvwOus', desc: 'A manivela emendada no giro ninja: um combo vistoso que dá fluidez e estilo à condução.' },
+          { id: 'int02', name: 'Rapidinhas (Variações)', thumb: 'assets/mod6.png', yt: 'Omxs4CwmXJQ', desc: 'Pequenas variações rápidas pra você ter mais repertório e nunca repetir o mesmo passo.' },
+          { id: 'int03', name: 'Arco Destro', thumb: 'assets/aula_postura.png', yt: 'dbpcedOzT6w', desc: 'O arco destro: condução de braço elegante que abre espaço pra novas combinações.' },
+          { id: 'int04', name: 'Parafuso', thumb: 'assets/aula_ritmo.png', yt: 'TJ4OE9PKHIw', desc: 'O parafuso: giro encaixado que impressiona quando bem conduzido. Atenção ao tempo.' },
+          { id: 'int05', name: 'Pião Invertido', thumb: 'assets/aula_quadril.png', yt: 'Y8dyNyBzp_Y', desc: 'A versão invertida do pião: mais um truque pra variar o giro contínuo da dama.' },
+          { id: 'int06', name: 'Caminhada Redonda', thumb: 'assets/aula_abraco.png', yt: 'iMjBgPgc1tE', desc: 'A caminhada redonda: deslocamento circular pela pista com leveza e controle.' },
+          { id: 'int07', name: 'Assalto em Linha', thumb: 'assets/aula_girolateral.png', yt: 'VFOwf-Y3KnE', desc: 'O assalto em linha: passo intermediário que combina troca de lado com condução firme.' },
+          { id: 'int08', name: 'Giro Duplo', thumb: 'assets/mod1.png', yt: 'Osu8jcLDtGA', desc: 'O giro duplo: dois giros encadeados na dama, no tempo certo, sem perder o eixo.' }
+        ]
+      }
+    ];
+
+    // ⚙️ EDITE AQUI: link do grupo e ID do vídeo bônus (deixe vazio p/ "em breve")
+    const COMUNIDADE_URL = ''; // ex.: 'https://chat.whatsapp.com/SEUCONVITE'
+    const AULA_BONUS_YT = ''; // ex.: 'dQw4w9WgXcQ' (ID do YouTube)
+
+    const BONUSES = [
+      {
+        id: 'b1', title: 'Guia da Abordagem Certa', desc: 'Como chamar pra dançar sem levar fora.', tag: 'Guia',
+        type: 'guide',
+        intro: 'Tirar alguém pra dançar trava mais gente do que o próprio passo. Siga este roteiro simples e o "vamos dançar?" vira natural.',
+        sections: [
+          { h: '1. Antes de chegar', items: ['Postura ereta e ombros relaxados — confiança começa no corpo.', 'Observe quem está dançando e quem está só curtindo a música (esses topam mais fácil).', 'Respire, sorria. Ninguém quer dançar com alguém tenso.'] },
+          { h: '2. O convite', items: ['Chegue de frente, faça contato visual e sorria.', 'Estenda a mão e use uma frase curta: "Vamos dançar?" ou "Bora?".', 'Sem textão, sem pedir desculpas. Convite direto passa segurança.'] },
+          { h: '3. Se levar um "não"', items: ['Sorria, agradeça ("Tranquilo, boa festa!") e siga em frente.', 'Não leve pro pessoal — pode ser cansaço, par marcado, mil motivos.', 'O próximo convite já apaga o anterior. Faz parte do jogo.'] },
+          { h: '4. Durante a dança', items: ['Comece leve, no básico, sentindo o nível do par.', 'Conduza com firmeza gentil — nunca puxe ou force.', 'No fim, agradeça e leve o par de volta. Educação é o que faz te chamarem de novo.'] },
+        ],
+      },
+      {
+        id: 'b2', title: 'Playlist Secreta "Arrasta-pé"', desc: 'Os melhores forrós pra treinar o ritmo em casa.', tag: 'Playlist',
+        type: 'playlist',
+        intro: 'Os clássicos que tocam em todo São João. Treine o passo básico e a condução com essas músicas — toque no nome pra ouvir.',
+        songs: [
+          ['Luiz Gonzaga', 'Asa Branca'],
+          ['Luiz Gonzaga', 'Qui Nem Jiló'],
+          ['Dominguinhos', 'Eu Só Quero Um Xodó'],
+          ['Dominguinhos', 'De Volta pro Aconchego'],
+          ['Falamansa', 'Xote dos Milagres'],
+          ['Falamansa', 'Asa Morena'],
+          ['Trio Nordestino', 'Procurando Tu'],
+          ['Elba Ramalho', 'Chão de Giz'],
+          ['Geraldo Azevedo', 'Dona da Minha Cabeça'],
+          ['Flávio José', 'Bonita Demais'],
+          ['Targino Gondim', 'Esperando na Janela'],
+          ['Santanna O Cantador', 'Mais Amor (Por Favor)'],
+        ],
+      },
+      {
+        id: 'b3', title: 'Comunidade VIP de Alunos', desc: 'Tire dúvidas e marque festas com a galera.', tag: 'Grupo',
+        type: 'link',
+        intro: 'Entre no grupo dos alunos pra tirar dúvidas com o professor, receber avisos e combinar de ir aos forrós com outras pessoas que também estão aprendendo.',
+        cta: 'Entrar no grupo', url: COMUNIDADE_URL,
+      },
+      {
+        id: 'b4', title: 'Aula Bônus: Passos Avançados', desc: 'O extra pra virar atração da festa.', tag: 'Vídeo',
+        type: 'video',
+        intro: 'Uma aula extra com combinações avançadas pra quando você já dominar as trilhas iniciante e intermediária.',
+        yt: AULA_BONUS_YT,
+      },
+      {
+        id: 'b5', title: 'Agenda de Forrós', desc: 'Onde encontrar forró perto de você.', tag: 'Guia',
+        type: 'agenda',
+        intro: 'Não existe São João melhor pra treinar do que o de verdade. Use estes caminhos pra achar forró perto de você o ano inteiro:',
+        links: [
+          ['Sympla', 'Busque "forró" + sua cidade', 'https://www.sympla.com.br/eventos?q=forr%C3%B3'],
+          ['Eventbrite', 'Eventos de forró e festas juninas', 'https://www.eventbrite.com.br/d/brazil/forr%C3%B3/'],
+          ['Instagram', 'Procure #forro + sua cidade (ex.: #forrosp)', 'https://www.instagram.com/explore/tags/forro/'],
+          ['Google Maps', 'Pesquise "casa de forró" ou "aula de forró" perto', 'https://www.google.com/maps/search/casa+de+forr%C3%B3'],
+        ],
+        tip: 'Dica: chegue cedo, fique perto da pista e não tenha pressa. As primeiras músicas são as melhores pra entrar sem plateia.',
+      },
+      {
+        id: 'b6', title: 'Checklist Anti-Travada', desc: 'O passo a passo pra não congelar no São João.', tag: 'Checklist',
+        type: 'checklist',
+        intro: 'Bateu o nervoso? Roda essa lista mentalmente antes e durante a dança. Marque os itens conforme dominar cada um.',
+        items: [
+          'Respirei fundo antes de entrar no São João',
+          'Comecei pelo passo básico, sem pressa',
+          'Olhei pro par, não pros próprios pés',
+          'Conduzi com a mão nas costas, firme mas leve',
+          'Senti a música em vez de contar os passos',
+          'Errei, sorri e continuei — ninguém reparou',
+          'Agradeci ao par no fim da dança',
+        ],
+      },
+    ];
+
+    /* ════════════════════════════════════════════════════════
+       OFERTAS (produtos pagos dentro da área)
+    ════════════════════════════════════════════════════════ */
+    // ⚙️ EDITE AQUI por oferta: link de checkout e código de desbloqueio do aluno
+    const OFFERS = [
+      {
+        id: 'o1',
+        title: 'Playlist de São João + Passos de Cada Música',
+        desc: 'A playlist certa pra treinar — e exatamente quais passos usar em cada música.',
+        price: 'R$19,90', old: 'R$39,90',
+        tag: 'Playlist Pro',
+        summary: '12 músicas · andamento + passos de cada uma · tags clicáveis que abrem a aula',
+        checkout: '', // ex.: 'https://seucheckout.com/playlist-do-sao-joao'
+        code: 'SAOJOAO',  // código que o aluno recebe após comprar
+        type: 'playsteps',
+        intro: 'Cada música vem com o andamento e os passos ideais pra treinar nela — toque no passo pra abrir a aula. Comece pelas lentas e vá acelerando.',
+        songs: [
+          { t: 'Esperando na Janela', a: 'Targino Gondim', feel: 'Lento', steps: ['Abraço', 'Bom Dia + Encaixe'] },
+          { t: 'De Volta pro Aconchego', a: 'Dominguinhos', feel: 'Lento', steps: ['Abraço', 'Chave de Braço e Charme da Dama'] },
+          { t: 'Xote dos Milagres', a: 'Falamansa', feel: 'Médio', steps: ['Passo Básico', 'Abraço', 'Giro Simples'] },
+          { t: 'Asa Branca', a: 'Luiz Gonzaga', feel: 'Médio', steps: ['Passo Básico', 'Giro Simples'] },
+          { t: 'Eu Só Quero Um Xodó', a: 'Dominguinhos', feel: 'Médio', steps: ['Passo Básico', 'Chuveirinho'] },
+          { t: 'Qui Nem Jiló', a: 'Luiz Gonzaga', feel: 'Médio', steps: ['Giro Simples', 'Chuveirinho'] },
+          { t: 'Bonita Demais', a: 'Flávio José', feel: 'Médio', steps: ['Chuveirinho', 'Pião'] },
+          { t: 'Chão de Giz', a: 'Elba Ramalho', feel: 'Médio', steps: ['Caminhada Redonda', 'Giro Duplo'] },
+          { t: 'Anunciação', a: 'Alceu Valença', feel: 'Acelerado', steps: ['Giro em Linha', 'Arco Destro'] },
+          { t: 'Procurando Tu', a: 'Trio Nordestino', feel: 'Acelerado', steps: ['Giro Simples', 'Arco-Íris + Giro em Linha'] },
+          { t: 'Sebastiana', a: 'Genival Lacerda', feel: 'Acelerado', steps: ['Rapidinhas (Variações)', 'Manivela + Giro Ninja'] },
+          { t: 'Forró do Xenhenhém', a: 'Genival Lacerda', feel: 'Acelerado', steps: ['Assalto em Linha', 'Pião Invertido'] },
+        ],
+      },
+      {
+        id: 'o2',
+        title: 'Sedução no São João',
+        desc: 'Coragem pra abordar, chamar pra dançar e conduzir o clima até o beijo.',
+        price: 'R$27,90', old: 'R$57,90',
+        tag: 'Conquista',
+        summary: 'Guia direto: destravar a coragem, abordar, chamar pra dançar, conversar e ir pro beijo na hora',
+        checkout: '', // ex.: 'https://seucheckout.com/seducao-sao-joao'
+        code: 'SAOJOAO27',
+        type: 'guide',
+        intro: 'No show de São João o jogo é na hora: ou você toma coragem e age, ou ela dança com outro. Esse guia te dá o passo a passo pra abordar sem travar, chamar pra dançar, esquentar a conversa e — lendo os sinais — partir pro beijo ali mesmo na festa.',
+        sections: [
+          {
+            h: '1. Destrave a coragem (antes de pensar demais)', items: [
+              'O medo passa com ação, não com análise. Viu, gostou, foi — conte até 3 e vá antes da cabeça te travar.',
+              'A pior resposta é um "não", e ele não muda nada na sua vida. O arrependimento de não tentar dói mais.',
+              'Postura ereta, peito aberto e um sorriso. A coragem aparece no corpo antes de aparecer na fala.',
+            ]
+          },
+          {
+            h: '2. A abordagem certa', items: [
+              'Troque olhares primeiro. Sorriso retribuído é sinal verde; olhar desviado, siga em frente sem drama.',
+              'Chegue de frente, calmo, sorrindo. Nada de chegar por trás ou no grupo fechado de amigas.',
+              'Comece simples: um "oi, tudo bem?" com presença vale mais que qualquer cantada decorada.',
+            ]
+          },
+          {
+            h: '3. Chame pra dançar', items: [
+              'O forró é o seu trunfo: "bora dançar esse?" é o convite mais natural que existe num São João.',
+              'Estenda a mão com confiança e sorria. Convite firme e leve passa segurança.',
+              'Levou um não pra dança? Tranquilo, sorria, agradeça e siga. Tem festa inteira pela frente.',
+            ]
+          },
+          {
+            h: '4. A conversa que esquenta', items: [
+              'Na dança e nos intervalos, papo curto e leve: brinque, elogie algo verdadeiro, pergunte o nome.',
+              'Escute e provoque com leveza — bom humor cria mais clima que assunto sério.',
+              'Diminua a distância aos poucos: chegar perto pra falar no ouvido por causa do som já é aproximação.',
+            ]
+          },
+          {
+            h: '5. O momento do beijo', items: [
+              'Leia os sinais: ela mantém o olhar, sorri, encosta, não se afasta — o clima está dado.',
+              'Aproxime devagar, olhe pra boca e pros olhos, e dê o tempo dela vir junto. Pressa estraga tudo.',
+              'Se ela recuar ou desviar, recue na hora e siga leve — respeito é o que te mantém atraente.',
+              'Rolou o beijo? Curta o momento sem pressão. O resto da noite flui sozinho.',
+            ]
+          },
+        ],
+        note: 'Regra de ouro: sedução é troca, nunca pressão. "Não" é não, sempre. O cara seguro, divertido e que respeita é o que mais conquista no São João.',
+      },
+    ];
+
+    const TOTAL_LESSONS = COURSE.reduce((n, m) => n + m.lessons.length, 0);
+    const FLAT = COURSE.flatMap((m, mi) => m.lessons.map((l, li) => ({ ...l, mIndex: mi, lIndex: li, module: m })));
+
+    /* ════════════════════════════════════════════════════════
+       ESTADO (localStorage)
+    ════════════════════════════════════════════════════════ */
+    const LS_DONE = 'enf_done';
+    const LS_LAST = 'enf_last';
+    const LS_CHECK = 'enf_check';
+
+    const LS_UNLOCK = 'enf_unlocked';
+
+    let done = new Set(JSON.parse(localStorage.getItem(LS_DONE) || '[]'));
+    let bchecks = new Set(JSON.parse(localStorage.getItem(LS_CHECK) || '[]'));
+    let unlocked = new Set(JSON.parse(localStorage.getItem(LS_UNLOCK) || '[]'));
+
+    const saveDone = () => localStorage.setItem(LS_DONE, JSON.stringify([...done]));
+    const saveChecks = () => localStorage.setItem(LS_CHECK, JSON.stringify([...bchecks]));
+    const saveUnlock = () => localStorage.setItem(LS_UNLOCK, JSON.stringify([...unlocked]));
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    function enterApp() {
+      $('greeting').textContent = saudacao() + '! Bora dançar?';
+      $('statTotal').textContent = '/' + TOTAL_LESSONS;
+      $('statModules').textContent = String(COURSE.length).padStart(2, '0');
+      $('modulesCount').textContent = `${String(COURSE.length).padStart(2, '0')} módulos · ${TOTAL_LESSONS} aulas`;
+      renderDashboard();
+      showView('dash');
     }
-  ];
 
-  // ⚙️ EDITE AQUI: link do grupo e ID do vídeo bônus (deixe vazio p/ "em breve")
-  const COMUNIDADE_URL = ''; // ex.: 'https://chat.whatsapp.com/SEUCONVITE'
-  const AULA_BONUS_YT  = ''; // ex.: 'dQw4w9WgXcQ' (ID do YouTube)
-
-  const BONUSES = [
-    {
-      id: 'b1', title: 'Guia da Abordagem Certa', desc: 'Como chamar pra dançar sem levar fora.', tag: 'Guia',
-      type: 'guide',
-      intro: 'Tirar alguém pra dançar trava mais gente do que o próprio passo. Siga este roteiro simples e o "vamos dançar?" vira natural.',
-      sections: [
-        { h: '1. Antes de chegar', items: ['Postura ereta e ombros relaxados — confiança começa no corpo.', 'Observe quem está dançando e quem está só curtindo a música (esses topam mais fácil).', 'Respire, sorria. Ninguém quer dançar com alguém tenso.'] },
-        { h: '2. O convite', items: ['Chegue de frente, faça contato visual e sorria.', 'Estenda a mão e use uma frase curta: "Vamos dançar?" ou "Bora?".', 'Sem textão, sem pedir desculpas. Convite direto passa segurança.'] },
-        { h: '3. Se levar um "não"', items: ['Sorria, agradeça ("Tranquilo, boa festa!") e siga em frente.', 'Não leve pro pessoal — pode ser cansaço, par marcado, mil motivos.', 'O próximo convite já apaga o anterior. Faz parte do jogo.'] },
-        { h: '4. Durante a dança', items: ['Comece leve, no básico, sentindo o nível do par.', 'Conduza com firmeza gentil — nunca puxe ou force.', 'No fim, agradeça e leve o par de volta. Educação é o que faz te chamarem de novo.'] },
-      ],
-    },
-    {
-      id: 'b2', title: 'Playlist Secreta "Arrasta-pé"', desc: 'Os melhores forrós pra treinar o ritmo em casa.', tag: 'Playlist',
-      type: 'playlist',
-      intro: 'Os clássicos que tocam em todo arraiá. Treine o passo básico e a condução com essas músicas — toque no nome pra ouvir.',
-      songs: [
-        ['Luiz Gonzaga', 'Asa Branca'],
-        ['Luiz Gonzaga', 'Qui Nem Jiló'],
-        ['Dominguinhos', 'Eu Só Quero Um Xodó'],
-        ['Dominguinhos', 'De Volta pro Aconchego'],
-        ['Falamansa', 'Xote dos Milagres'],
-        ['Falamansa', 'Asa Morena'],
-        ['Trio Nordestino', 'Procurando Tu'],
-        ['Elba Ramalho', 'Chão de Giz'],
-        ['Geraldo Azevedo', 'Dona da Minha Cabeça'],
-        ['Flávio José', 'Bonita Demais'],
-        ['Targino Gondim', 'Esperando na Janela'],
-        ['Santanna O Cantador', 'Mais Amor (Por Favor)'],
-      ],
-    },
-    {
-      id: 'b3', title: 'Comunidade VIP de Alunos', desc: 'Tire dúvidas e marque festas com a galera.', tag: 'Grupo',
-      type: 'link',
-      intro: 'Entre no grupo dos alunos pra tirar dúvidas com o professor, receber avisos e combinar de ir aos forrós com outras pessoas que também estão aprendendo.',
-      cta: 'Entrar no grupo', url: COMUNIDADE_URL,
-    },
-    {
-      id: 'b4', title: 'Aula Bônus: Passos Avançados', desc: 'O extra pra virar atração da festa.', tag: 'Vídeo',
-      type: 'video',
-      intro: 'Uma aula extra com combinações avançadas pra quando você já dominar as trilhas iniciante e intermediária.',
-      yt: AULA_BONUS_YT,
-    },
-    {
-      id: 'b5', title: 'Agenda de Forrós', desc: 'Onde encontrar forró perto de você.', tag: 'Guia',
-      type: 'agenda',
-      intro: 'Não existe arraiá melhor pra treinar do que o de verdade. Use estes caminhos pra achar forró perto de você o ano inteiro:',
-      links: [
-        ['Sympla', 'Busque "forró" + sua cidade', 'https://www.sympla.com.br/eventos?q=forr%C3%B3'],
-        ['Eventbrite', 'Eventos de forró e festas juninas', 'https://www.eventbrite.com.br/d/brazil/forr%C3%B3/'],
-        ['Instagram', 'Procure #forro + sua cidade (ex.: #forrosp)', 'https://www.instagram.com/explore/tags/forro/'],
-        ['Google Maps', 'Pesquise "casa de forró" ou "aula de forró" perto', 'https://www.google.com/maps/search/casa+de+forr%C3%B3'],
-      ],
-      tip: 'Dica: chegue cedo, fique perto da pista e não tenha pressa. As primeiras músicas são as melhores pra entrar sem plateia.',
-    },
-    {
-      id: 'b6', title: 'Checklist Anti-Travada', desc: 'O passo a passo pra não congelar no arraiá.', tag: 'Checklist',
-      type: 'checklist',
-      intro: 'Bateu o nervoso? Roda essa lista mentalmente antes e durante a dança. Marque os itens conforme dominar cada um.',
-      items: [
-        'Respirei fundo antes de entrar no arraiá',
-        'Comecei pelo passo básico, sem pressa',
-        'Olhei pro par, não pros próprios pés',
-        'Conduzi com a mão nas costas, firme mas leve',
-        'Senti a música em vez de contar os passos',
-        'Errei, sorri e continuei — ninguém reparou',
-        'Agradeci ao par no fim da dança',
-      ],
-    },
-  ];
-
-  /* ════════════════════════════════════════════════════════
-     OFERTAS (produtos pagos dentro da área)
-  ════════════════════════════════════════════════════════ */
-  // ⚙️ EDITE AQUI por oferta: link de checkout e código de desbloqueio do aluno
-  const OFFERS = [
-    {
-      id: 'o1',
-      title: 'Playlist do Arraiá + Passos de Cada Música',
-      desc: 'A playlist certa pra treinar — e exatamente quais passos usar em cada música.',
-      price: 'R$19,90', old: 'R$39,90',
-      tag: 'Playlist Pro',
-      summary: '12 músicas · andamento + passos de cada uma · tags clicáveis que abrem a aula',
-      checkout: '', // ex.: 'https://seucheckout.com/playlist-do-arraia'
-      code: 'ARRAIA',  // código que o aluno recebe após comprar
-      type: 'playsteps',
-      intro: 'Cada música vem com o andamento e os passos ideais pra treinar nela — toque no passo pra abrir a aula. Comece pelas lentas e vá acelerando.',
-      songs: [
-        { t: 'Esperando na Janela', a: 'Targino Gondim', feel: 'Lento',     steps: ['Abraço', 'Bom Dia + Encaixe'] },
-        { t: 'De Volta pro Aconchego', a: 'Dominguinhos', feel: 'Lento',     steps: ['Abraço', 'Chave de Braço e Charme da Dama'] },
-        { t: 'Xote dos Milagres', a: 'Falamansa', feel: 'Médio',             steps: ['Passo Básico', 'Abraço', 'Giro Simples'] },
-        { t: 'Asa Branca', a: 'Luiz Gonzaga', feel: 'Médio',                 steps: ['Passo Básico', 'Giro Simples'] },
-        { t: 'Eu Só Quero Um Xodó', a: 'Dominguinhos', feel: 'Médio',        steps: ['Passo Básico', 'Chuveirinho'] },
-        { t: 'Qui Nem Jiló', a: 'Luiz Gonzaga', feel: 'Médio',              steps: ['Giro Simples', 'Chuveirinho'] },
-        { t: 'Bonita Demais', a: 'Flávio José', feel: 'Médio',               steps: ['Chuveirinho', 'Pião'] },
-        { t: 'Chão de Giz', a: 'Elba Ramalho', feel: 'Médio',               steps: ['Caminhada Redonda', 'Giro Duplo'] },
-        { t: 'Anunciação', a: 'Alceu Valença', feel: 'Acelerado',           steps: ['Giro em Linha', 'Arco Destro'] },
-        { t: 'Procurando Tu', a: 'Trio Nordestino', feel: 'Acelerado',       steps: ['Giro Simples', 'Arco-Íris + Giro em Linha'] },
-        { t: 'Sebastiana', a: 'Genival Lacerda', feel: 'Acelerado',          steps: ['Rapidinhas (Variações)', 'Manivela + Giro Ninja'] },
-        { t: 'Forró do Xenhenhém', a: 'Genival Lacerda', feel: 'Acelerado',  steps: ['Assalto em Linha', 'Pião Invertido'] },
-      ],
-    },
-    {
-      id: 'o2',
-      title: 'Sedução no São João',
-      desc: 'Coragem pra abordar, chamar pra dançar e conduzir o clima até o beijo — ali mesmo, no show de São João.',
-      price: 'R$27,90', old: 'R$57,90',
-      tag: 'Conquista',
-      summary: 'Guia direto: destravar a coragem, abordar, chamar pra dançar, conversar e ir pro beijo na hora',
-      checkout: '', // ex.: 'https://seucheckout.com/seducao-sao-joao'
-      code: 'ARRAIA27',
-      type: 'guide',
-      intro: 'No show de São João o jogo é na hora: ou você toma coragem e age, ou ela dança com outro. Esse guia te dá o passo a passo pra abordar sem travar, chamar pra dançar, esquentar a conversa e — lendo os sinais — partir pro beijo ali mesmo na festa.',
-      sections: [
-        { h: '1. Destrave a coragem (antes de pensar demais)', items: [
-          'O medo passa com ação, não com análise. Viu, gostou, foi — conte até 3 e vá antes da cabeça te travar.',
-          'A pior resposta é um "não", e ele não muda nada na sua vida. O arrependimento de não tentar dói mais.',
-          'Postura ereta, peito aberto e um sorriso. A coragem aparece no corpo antes de aparecer na fala.',
-        ]},
-        { h: '2. A abordagem certa', items: [
-          'Troque olhares primeiro. Sorriso retribuído é sinal verde; olhar desviado, siga em frente sem drama.',
-          'Chegue de frente, calmo, sorrindo. Nada de chegar por trás ou no grupo fechado de amigas.',
-          'Comece simples: um "oi, tudo bem?" com presença vale mais que qualquer cantada decorada.',
-        ]},
-        { h: '3. Chame pra dançar', items: [
-          'O forró é o seu trunfo: "bora dançar esse?" é o convite mais natural que existe num São João.',
-          'Estenda a mão com confiança e sorria. Convite firme e leve passa segurança.',
-          'Levou um não pra dança? Tranquilo, sorria, agradeça e siga. Tem festa inteira pela frente.',
-        ]},
-        { h: '4. A conversa que esquenta', items: [
-          'Na dança e nos intervalos, papo curto e leve: brinque, elogie algo verdadeiro, pergunte o nome.',
-          'Escute e provoque com leveza — bom humor cria mais clima que assunto sério.',
-          'Diminua a distância aos poucos: chegar perto pra falar no ouvido por causa do som já é aproximação.',
-        ]},
-        { h: '5. O momento do beijo', items: [
-          'Leia os sinais: ela mantém o olhar, sorri, encosta, não se afasta — o clima está dado.',
-          'Aproxime devagar, olhe pra boca e pros olhos, e dê o tempo dela vir junto. Pressa estraga tudo.',
-          'Se ela recuar ou desviar, recue na hora e siga leve — respeito é o que te mantém atraente.',
-          'Rolou o beijo? Curta o momento sem pressão. O resto da noite flui sozinho.',
-        ]},
-      ],
-      note: 'Regra de ouro: sedução é troca, nunca pressão. "Não" é não, sempre. O cara seguro, divertido e que respeita é o que mais conquista no arraiá.',
-    },
-  ];
-
-  const TOTAL_LESSONS = COURSE.reduce((n, m) => n + m.lessons.length, 0);
-  const FLAT = COURSE.flatMap((m, mi) => m.lessons.map((l, li) => ({ ...l, mIndex: mi, lIndex: li, module: m })));
-
-  /* ════════════════════════════════════════════════════════
-     ESTADO (localStorage)
-  ════════════════════════════════════════════════════════ */
-  const LS_DONE = 'enf_done';
-  const LS_LAST = 'enf_last';
-  const LS_CHECK = 'enf_check';
-
-  const LS_UNLOCK = 'enf_unlocked';
-
-  let done = new Set(JSON.parse(localStorage.getItem(LS_DONE) || '[]'));
-  let bchecks = new Set(JSON.parse(localStorage.getItem(LS_CHECK) || '[]'));
-  let unlocked = new Set(JSON.parse(localStorage.getItem(LS_UNLOCK) || '[]'));
-
-  const saveDone = () => localStorage.setItem(LS_DONE, JSON.stringify([...done]));
-  const saveChecks = () => localStorage.setItem(LS_CHECK, JSON.stringify([...bchecks]));
-  const saveUnlock = () => localStorage.setItem(LS_UNLOCK, JSON.stringify([...unlocked]));
-  const $ = (id) => document.getElementById(id);
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-  function enterApp() {
-    $('greeting').textContent = saudacao() + '! Bora dançar?';
-    $('statTotal').textContent = '/' + TOTAL_LESSONS;
-    $('statModules').textContent = String(COURSE.length).padStart(2, '0');
-    $('modulesCount').textContent = `${String(COURSE.length).padStart(2,'0')} módulos · ${TOTAL_LESSONS} aulas`;
-    renderDashboard();
-    showView('dash');
-  }
-
-  function saudacao() {
-    const h = new Date().getHours();
-    if (h < 12) return 'Bom dia';
-    if (h < 18) return 'Boa tarde';
-    return 'Boa noite';
-  }
-
-  /* ════════════════════════════════════════════════════════
-     RENDER · DASHBOARD
-  ════════════════════════════════════════════════════════ */
-  function renderDashboard() {
-    updateProgress();
-    renderContinue();
-    renderModules();
-    renderBonuses();
-    renderOffers();
-  }
-
-  function updateProgress() {
-    const n = done.size;
-    const pct = Math.round((n / TOTAL_LESSONS) * 100);
-    $('statDone').textContent = n;
-    $('statPct').textContent = pct;
-    $('topProgressFill').style.width = pct + '%';
-    $('topProgressLabel').textContent = pct + '%';
-  }
-
-  function nextLessonToWatch() {
-    const lastId = localStorage.getItem(LS_LAST);
-    const notDone = FLAT.find((l) => !done.has(l.id));
-    if (lastId) {
-      const last = FLAT.find((l) => l.id === lastId);
-      if (last && !done.has(last.id)) return last;
+    function saudacao() {
+      const h = new Date().getHours();
+      if (h < 12) return 'Bom dia';
+      if (h < 18) return 'Boa tarde';
+      return 'Boa noite';
     }
-    return notDone || FLAT[0];
-  }
 
-  function renderContinue() {
-    const allDone = done.size === TOTAL_LESSONS;
-    const l = nextLessonToWatch();
-    const card = $('continueCard');
-    if (allDone) {
-      card.innerHTML = `
+    /* ════════════════════════════════════════════════════════
+       RENDER · DASHBOARD
+    ════════════════════════════════════════════════════════ */
+    function renderDashboard() {
+      updateProgress();
+      renderContinue();
+      renderModules();
+      renderBonuses();
+      renderOffers();
+    }
+
+    function updateProgress() {
+      const n = done.size;
+      const pct = Math.round((n / TOTAL_LESSONS) * 100);
+      $('statDone').textContent = n;
+      $('statPct').textContent = pct;
+      $('topProgressFill').style.width = pct + '%';
+      $('topProgressLabel').textContent = pct + '%';
+    }
+
+    function nextLessonToWatch() {
+      const lastId = localStorage.getItem(LS_LAST);
+      const notDone = FLAT.find((l) => !done.has(l.id));
+      if (lastId) {
+        const last = FLAT.find((l) => l.id === lastId);
+        if (last && !done.has(last.id)) return last;
+      }
+      return notDone || FLAT[0];
+    }
+
+    function renderContinue() {
+      const allDone = done.size === TOTAL_LESSONS;
+      const l = nextLessonToWatch();
+      const card = $('continueCard');
+      if (allDone) {
+        card.innerHTML = `
         <img class="continue-img" src="assets/mod6.png" alt="" />
         <div class="continue-body">
           <div class="continue-tag">★ Curso concluído</div>
           <div class="continue-title">Você saiu da parede!</div>
-          <p class="continue-meta">Todas as 18 aulas concluídas. Bora pro arraiá mostrar o que aprendeu — e revisar sempre que quiser.</p>
+          <p class="continue-meta">Todas as ${TOTAL_LESSONS} aulas concluídas. Bora pro São João mostrar o que aprendeu — e revisar sempre que quiser.</p>
           <button class="btn-primary" data-go="${l.id}">Revisar aulas
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
           </button>
         </div>`;
-    } else {
-      const started = done.size > 0 || localStorage.getItem(LS_LAST);
-      card.innerHTML = `
+      } else {
+        const started = done.size > 0 || localStorage.getItem(LS_LAST);
+        card.innerHTML = `
         <img class="continue-img" src="${l.thumb}" alt="" />
         <div class="continue-body">
           <div class="continue-tag">${started ? '▶ Continuar de onde parou' : '▶ Comece por aqui'}</div>
           <div class="continue-title">${l.name}</div>
-          <p class="continue-meta">Módulo ${String(l.mIndex + 1).padStart(2,'0')} · ${l.module.title} — Aula ${l.lIndex + 1}</p>
+          <p class="continue-meta">Módulo ${String(l.mIndex + 1).padStart(2, '0')} · ${l.module.title} — Aula ${l.lIndex + 1}</p>
           <button class="btn-primary" data-go="${l.id}">${started ? 'Continuar aula' : 'Começar agora'}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>`;
+      }
+      card.querySelector('[data-go]').addEventListener('click', (e) => openLesson(e.currentTarget.dataset.go));
     }
-    card.querySelector('[data-go]').addEventListener('click', (e) => openLesson(e.currentTarget.dataset.go));
-  }
 
-  function moduleProgress(m) {
-    const total = m.lessons.length;
-    const n = m.lessons.filter((l) => done.has(l.id)).length;
-    return { n, total, pct: Math.round((n / total) * 100) };
-  }
+    function moduleProgress(m) {
+      const total = m.lessons.length;
+      const n = m.lessons.filter((l) => done.has(l.id)).length;
+      return { n, total, pct: Math.round((n / total) * 100) };
+    }
 
-  function renderModules() {
-    const grid = $('moduleGrid');
-    grid.innerHTML = '';
-    COURSE.forEach((m, i) => {
-      const p = moduleProgress(m);
-      const el = document.createElement('button');
-      el.className = 'module-card' + (p.pct === 100 ? ' complete' : '');
-      el.innerHTML = `
+    function renderModules() {
+      const grid = $('moduleGrid');
+      grid.innerHTML = '';
+      COURSE.forEach((m, i) => {
+        const p = moduleProgress(m);
+        const el = document.createElement('button');
+        el.className = 'module-card' + (p.pct === 100 ? ' complete' : '');
+        el.innerHTML = `
         <div class="module-thumb-wrap">
           <span class="module-index">Módulo ${String(i + 1).padStart(2, '0')}</span>
           <span class="module-done-badge">
@@ -1222,58 +2274,58 @@
           </div>
           <div class="module-bar"><div class="module-bar-fill" style="width:${p.pct}%"></div></div>
         </div>`;
-      el.addEventListener('click', () => openLesson(m.lessons[0].id, true));
-      grid.appendChild(el);
-    });
-  }
+        el.addEventListener('click', () => openLesson(m.lessons[0].id, true));
+        grid.appendChild(el);
+      });
+    }
 
-  const BONUS_ICON = {
-    guide:     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-    playlist:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
-    link:      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-    video:     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
-    agenda:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
-    checklist: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
-  };
+    const BONUS_ICON = {
+      guide: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+      playlist: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+      link: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+      video: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+      agenda: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      checklist: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+    };
 
-  function renderBonuses() {
-    const grid = $('bonusGrid');
-    grid.innerHTML = '';
-    BONUSES.forEach((b) => {
-      const el = document.createElement('button');
-      el.className = 'bonus-card';
-      el.innerHTML = `
+    function renderBonuses() {
+      const grid = $('bonusGrid');
+      grid.innerHTML = '';
+      BONUSES.forEach((b) => {
+        const el = document.createElement('button');
+        el.className = 'bonus-card';
+        el.innerHTML = `
         <div class="bonus-icon">${BONUS_ICON[b.type] || BONUS_ICON.guide}</div>
         <div class="bonus-info">
           <h3>${b.title}</h3>
           <p>${b.desc}</p>
           <span class="bonus-pill${isBonusPending(b) ? ' pending' : ''}">${b.tag} · ${isBonusPending(b) ? 'Em breve' : 'Acessar'}</span>
         </div>`;
-      el.addEventListener('click', () => openBonus(b.id));
-      grid.appendChild(el);
-    });
-  }
+        el.addEventListener('click', () => openBonus(b.id));
+        grid.appendChild(el);
+      });
+    }
 
-  /* ════════════════════════════════════════════════════════
-     BÔNUS (entregáveis)
-  ════════════════════════════════════════════════════════ */
-  /* ════════════════════════════════════════════════════════
-     OFERTAS
-  ════════════════════════════════════════════════════════ */
-  const lessonIdByName = (name) => {
-    const l = FLAT.find((x) => x.name.toLowerCase() === String(name).toLowerCase());
-    return l ? l.id : null;
-  };
+    /* ════════════════════════════════════════════════════════
+       BÔNUS (entregáveis)
+    ════════════════════════════════════════════════════════ */
+    /* ════════════════════════════════════════════════════════
+       OFERTAS
+    ════════════════════════════════════════════════════════ */
+    const lessonIdByName = (name) => {
+      const l = FLAT.find((x) => x.name.toLowerCase() === String(name).toLowerCase());
+      return l ? l.id : null;
+    };
 
-  function renderOffers() {
-    const grid = $('offersGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    OFFERS.forEach((o) => {
-      const owned = unlocked.has(o.id);
-      const el = document.createElement('button');
-      el.className = 'offer-card';
-      el.innerHTML = `
+    function renderOffers() {
+      const grid = $('offersGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      OFFERS.forEach((o) => {
+        const owned = unlocked.has(o.id);
+        const el = document.createElement('button');
+        el.className = 'offer-card';
+        el.innerHTML = `
         <div class="offer-badge">${owned ? '✓ Liberado' : o.tag}</div>
         <h3 class="offer-title">${esc(o.title)}</h3>
         <p class="offer-desc">${esc(o.desc)}</p>
@@ -1283,24 +2335,24 @@
             : `<span class="offer-price"><span class="offer-old">${esc(o.old || '')}</span> ${esc(o.price)}</span>
                <span class="offer-lock"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>`}
         </div>`;
-      el.addEventListener('click', () => openOffer(o.id));
-      grid.appendChild(el);
-    });
-  }
+        el.addEventListener('click', () => openOffer(o.id));
+        grid.appendChild(el);
+      });
+    }
 
-  function openOffer(id) {
-    const o = OFFERS.find((x) => x.id === id);
-    if (!o) return;
-    renderOfferDetail(o);
-    showView('bonus');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    function openOffer(id) {
+      const o = OFFERS.find((x) => x.id === id);
+      if (!o) return;
+      renderOfferDetail(o);
+      showView('bonus');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-  function renderOfferDetail(o) {
-    const wrap = $('bonusDetail');
-    if (!unlocked.has(o.id)) {
-      // tela de compra / desbloqueio
-      wrap.innerHTML = `
+    function renderOfferDetail(o) {
+      const wrap = $('bonusDetail');
+      if (!unlocked.has(o.id)) {
+        // tela de compra / desbloqueio
+        wrap.innerHTML = `
         <div class="bd-head">
           <div class="bd-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
@@ -1322,32 +2374,32 @@
             <span class="buygate-err" id="unlockErr"></span>
           </div>
         </div>`;
-      const tryUnlock = () => {
-        const v = $('unlockInput').value.trim().toUpperCase();
-        if (v && v === String(o.code).toUpperCase()) {
-          unlocked.add(o.id); saveUnlock();
-          toast('🔓 Oferta liberada!');
-          renderOfferDetail(o);
-        } else {
-          $('unlockErr').textContent = 'Código inválido. Confira o e-mail da compra.';
-        }
-      };
-      $('unlockBtn').addEventListener('click', tryUnlock);
-      $('unlockInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
-      return;
-    }
+        const tryUnlock = () => {
+          const v = $('unlockInput').value.trim().toUpperCase();
+          if (v && v === String(o.code).toUpperCase()) {
+            unlocked.add(o.id); saveUnlock();
+            toast('🔓 Oferta liberada!');
+            renderOfferDetail(o);
+          } else {
+            $('unlockErr').textContent = 'Código inválido. Confira o e-mail da compra.';
+          }
+        };
+        $('unlockBtn').addEventListener('click', tryUnlock);
+        $('unlockInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+        return;
+      }
 
-    // conteúdo liberado
-    if (o.type === 'playsteps') {
-      const rows = o.songs.map((s, i) => {
-        const q = encodeURIComponent(`${s.a} ${s.t}`);
-        const steps = s.steps.map((name) => {
-          const lid = lessonIdByName(name);
-          return lid
-            ? `<button class="step-tag" data-lesson="${lid}">${esc(name)}</button>`
-            : `<span class="step-tag static">${esc(name)}</span>`;
-        }).join('');
-        return `<div class="song-row">
+      // conteúdo liberado
+      if (o.type === 'playsteps') {
+        const rows = o.songs.map((s, i) => {
+          const q = encodeURIComponent(`${s.a} ${s.t}`);
+          const steps = s.steps.map((name) => {
+            const lid = lessonIdByName(name);
+            return lid
+              ? `<button class="step-tag" data-lesson="${lid}">${esc(name)}</button>`
+              : `<span class="step-tag static">${esc(name)}</span>`;
+          }).join('');
+          return `<div class="song-row">
           <div class="song-top">
             <span class="song-num">${String(i + 1).padStart(2, '0')}</span>
             <a class="song-main" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">
@@ -1358,28 +2410,28 @@
           </div>
           <div class="song-steps">${steps}</div>
         </div>`;
-      }).join('');
-      wrap.innerHTML = `
+        }).join('');
+        wrap.innerHTML = `
         <div class="bd-head">
           <div class="bd-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
           <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
         </div>
         <p class="bd-intro">${esc(o.intro)}</p>
         <div class="song-list">${rows}</div>`;
-      wrap.querySelectorAll('.step-tag[data-lesson]').forEach((b) => {
-        b.addEventListener('click', () => openLesson(b.dataset.lesson));
-      });
-    }
+        wrap.querySelectorAll('.step-tag[data-lesson]').forEach((b) => {
+          b.addEventListener('click', () => openLesson(b.dataset.lesson));
+        });
+      }
 
-    else if (o.type === 'guide') {
-      const sections = o.sections.map((s) => `
+      else if (o.type === 'guide') {
+        const sections = o.sections.map((s) => `
         <div class="bd-section">
           <h3>${esc(s.h)}</h3>
           <ul class="bd-list">
             ${s.items.map((it) => `<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>${esc(it)}</span></li>`).join('')}
           </ul>
         </div>`).join('');
-      wrap.innerHTML = `
+        wrap.innerHTML = `
         <div class="bd-head">
           <div class="bd-icon">${BONUS_ICON.guide}</div>
           <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
@@ -1387,87 +2439,87 @@
         <p class="bd-intro">${esc(o.intro)}</p>
         ${sections}
         ${o.note ? `<div class="bd-note">${esc(o.note)}</div>` : ''}`;
+      }
     }
-  }
 
-  const isBonusPending = (b) => (b.type === 'link' && !b.url) || (b.type === 'video' && !b.yt);
+    const isBonusPending = (b) => (b.type === 'link' && !b.url) || (b.type === 'video' && !b.yt);
 
-  function bonusSoonHTML() {
-    return `<div class="bd-soon">
+    function bonusSoonHTML() {
+      return `<div class="bd-soon">
       <div class="bd-soon-icon">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
       </div>
       <div class="bd-soon-title">Conteúdo sendo gerado</div>
       <p class="bd-soon-text">Estamos preparando este bônus pra você<span class="bd-soon-dots"></span><br/>Em breve ele aparece aqui na sua área de membros.</p>
     </div>`;
-  }
+    }
 
-  function openBonus(id) {
-    const b = BONUSES.find((x) => x.id === id);
-    if (!b) return;
-    renderBonusDetail(b);
-    showView('bonus');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    function openBonus(id) {
+      const b = BONUSES.find((x) => x.id === id);
+      if (!b) return;
+      renderBonusDetail(b);
+      showView('bonus');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-  function renderBonusDetail(b) {
-    const wrap = $('bonusDetail');
-    let body = '';
+    function renderBonusDetail(b) {
+      const wrap = $('bonusDetail');
+      let body = '';
 
-    if (b.type === 'guide') {
-      body = b.sections.map((s) => `
+      if (b.type === 'guide') {
+        body = b.sections.map((s) => `
         <div class="bd-section">
           <h3>${esc(s.h)}</h3>
           <ul class="bd-list">
             ${s.items.map((it) => `<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>${esc(it)}</span></li>`).join('')}
           </ul>
         </div>`).join('');
-    }
+      }
 
-    else if (b.type === 'playlist') {
-      body = `<div class="bd-rows">${b.songs.map(([artist, title], i) => {
-        const q = encodeURIComponent(`${artist} ${title}`);
-        return `<a class="bd-row" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">
+      else if (b.type === 'playlist') {
+        body = `<div class="bd-rows">${b.songs.map(([artist, title], i) => {
+          const q = encodeURIComponent(`${artist} ${title}`);
+          return `<a class="bd-row" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">
           <span class="bd-row-num">${String(i + 1).padStart(2, '0')}</span>
           <span class="bd-row-main"><span class="bd-row-title">${esc(title)}</span><span class="bd-row-sub">${esc(artist)}</span></span>
           <span class="bd-row-go"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
         </a>`;
-      }).join('')}</div>`;
-    }
+        }).join('')}</div>`;
+      }
 
-    else if (b.type === 'agenda') {
-      body = `<div class="bd-rows">${b.links.map(([name, sub, url]) => `
+      else if (b.type === 'agenda') {
+        body = `<div class="bd-rows">${b.links.map(([name, sub, url]) => `
         <a class="bd-row" href="${url}" target="_blank" rel="noopener">
           <span class="bd-row-main"><span class="bd-row-title">${esc(name)}</span><span class="bd-row-sub">${esc(sub)}</span></span>
           <span class="bd-row-go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
         </a>`).join('')}</div>
         ${b.tip ? `<div class="bd-note">${esc(b.tip)}</div>` : ''}`;
-    }
+      }
 
-    else if (b.type === 'checklist') {
-      body = `<ul class="bd-check" id="bdCheck">${b.items.map((it, i) => {
-        const key = b.id + ':' + i, on = bchecks.has(key);
-        return `<li data-key="${key}" class="${on ? 'on' : ''}">
+      else if (b.type === 'checklist') {
+        body = `<ul class="bd-check" id="bdCheck">${b.items.map((it, i) => {
+          const key = b.id + ':' + i, on = bchecks.has(key);
+          return `<li data-key="${key}" class="${on ? 'on' : ''}">
           <span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <span>${esc(it)}</span>
         </li>`;
-      }).join('')}</ul>`;
-    }
+        }).join('')}</ul>`;
+      }
 
-    else if (b.type === 'link') {
-      body = b.url
-        ? `<a class="bd-cta" href="${b.url}" target="_blank" rel="noopener">${esc(b.cta)}
+      else if (b.type === 'link') {
+        body = b.url
+          ? `<a class="bd-cta" href="${b.url}" target="_blank" rel="noopener">${esc(b.cta)}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>`
-        : bonusSoonHTML();
-    }
+          : bonusSoonHTML();
+      }
 
-    else if (b.type === 'video') {
-      body = b.yt
-        ? `<div class="bd-video" id="bdVideo"></div>`
-        : bonusSoonHTML();
-    }
+      else if (b.type === 'video') {
+        body = b.yt
+          ? `<div class="bd-video" id="bdVideo"></div>`
+          : bonusSoonHTML();
+      }
 
-    wrap.innerHTML = `
+      wrap.innerHTML = `
       <div class="bd-head">
         <div class="bd-icon">${BONUS_ICON[b.type] || BONUS_ICON.guide}</div>
         <div>
@@ -1478,49 +2530,49 @@
       <p class="bd-intro">${esc(b.intro)}</p>
       ${body}`;
 
-    if (b.type === 'checklist') {
-      wrap.querySelectorAll('#bdCheck li').forEach((li) => {
-        li.addEventListener('click', () => {
-          const k = li.dataset.key;
-          if (bchecks.has(k)) { bchecks.delete(k); li.classList.remove('on'); }
-          else { bchecks.add(k); li.classList.add('on'); }
-          saveChecks();
+      if (b.type === 'checklist') {
+        wrap.querySelectorAll('#bdCheck li').forEach((li) => {
+          li.addEventListener('click', () => {
+            const k = li.dataset.key;
+            if (bchecks.has(k)) { bchecks.delete(k); li.classList.remove('on'); }
+            else { bchecks.add(k); li.classList.add('on'); }
+            saveChecks();
+          });
         });
-      });
+      }
+      if (b.type === 'video' && b.yt) {
+        buildNativePlayer({ id: 'bonus-' + b.id, yt: b.yt, name: b.title, thumb: 'assets/mod4.png' }, $('bdVideo'));
+      }
     }
-    if (b.type === 'video' && b.yt) {
-      buildNativePlayer({ id: 'bonus-' + b.id, yt: b.yt, name: b.title, thumb: 'assets/mod4.png' }, $('bdVideo'));
+
+    /* ════════════════════════════════════════════════════════
+       PLAYER
+    ════════════════════════════════════════════════════════ */
+    let currentId = null;
+
+    function openLesson(id, scrollTop) {
+      currentId = id;
+      localStorage.setItem(LS_LAST, id);
+      renderPlayer();
+      showView('player');
+      if (scrollTop !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }
 
-  /* ════════════════════════════════════════════════════════
-     PLAYER
-  ════════════════════════════════════════════════════════ */
-  let currentId = null;
-
-  function openLesson(id, scrollTop) {
-    currentId = id;
-    localStorage.setItem(LS_LAST, id);
-    renderPlayer();
-    showView('player');
-    if (scrollTop !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function renderVideoStage(l) {
-    const stage = $('playerVideo');
-    if (l.yt) {
-      buildNativePlayer(l, stage);
-      return;
-    } else if (l.video) {
-      const src = l.video.split('/').map(encodeURIComponent).join('/');
-      const poster = encodeURI(l.thumb);
-      stage.innerHTML = `<video controls playsinline preload="metadata" poster="${poster}"
+    function renderVideoStage(l) {
+      const stage = $('playerVideo');
+      if (l.yt) {
+        buildNativePlayer(l, stage);
+        return;
+      } else if (l.video) {
+        const src = l.video.split('/').map(encodeURIComponent).join('/');
+        const poster = encodeURI(l.thumb);
+        stage.innerHTML = `<video controls playsinline preload="metadata" poster="${poster}"
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;opacity:1;z-index:3;">
         <source src="${src}" type="video/mp4" />
         Seu navegador não suporta vídeo HTML5.
       </video>`;
-    } else {
-      stage.innerHTML = `
+      } else {
+        stage.innerHTML = `
         <img src="${encodeURI(l.thumb)}" alt="${l.name}" />
         <div class="player-video-overlay">
           <div class="player-play">
@@ -1528,53 +2580,53 @@
           </div>
           <div class="player-video-note">Vídeo desta aula em breve</div>
         </div>`;
-    }
-  }
-
-  /* ── Player nativo sobre o YouTube (UI própria) ── */
-  const NP_ICON = {
-    play:  '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>',
-    pause: '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>',
-    vol:   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>',
-    mute:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>',
-    fs:    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg>',
-  };
-  const NP_RATES = [1, 1.25, 1.5, 2];
-  let np = { player: null, lesson: null, tick: null, barTimer: null, rateIdx: 0, pending: null };
-
-  function ytAPIReady() {
-    return new Promise((res) => {
-      if (window.YT && window.YT.Player) return res();
-      (window.__ytCbs = window.__ytCbs || []).push(res);
-      if (!window.__ytLoading) {
-        window.__ytLoading = true;
-        const prev = window.onYouTubeIframeAPIReady;
-        window.onYouTubeIframeAPIReady = () => { prev && prev(); (window.__ytCbs || []).forEach((f) => f()); window.__ytCbs = []; };
-        const s = document.createElement('script');
-        s.src = 'https://www.youtube.com/iframe_api';
-        document.head.appendChild(s);
       }
-    });
-  }
+    }
 
-  function npFmt(t) {
-    t = Math.max(0, Math.floor(t || 0));
-    const m = Math.floor(t / 60), s = t % 60;
-    return m + ':' + String(s).padStart(2, '0');
-  }
+    /* ── Player nativo sobre o YouTube (UI própria) ── */
+    const NP_ICON = {
+      play: '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>',
+      pause: '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>',
+      vol: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>',
+      mute: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>',
+      fs: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg>',
+    };
+    const NP_RATES = [1, 1.25, 1.5, 2];
+    let np = { player: null, lesson: null, tick: null, barTimer: null, rateIdx: 0, pending: null };
 
-  function destroyNP() {
-    if (np.tick) { clearInterval(np.tick); np.tick = null; }
-    if (np.barTimer) { clearTimeout(np.barTimer); np.barTimer = null; }
-    if (np.player && np.player.destroy) { try { np.player.destroy(); } catch (e) {} }
-    np.player = null; np.lesson = null; np.pending = null;
-  }
+    function ytAPIReady() {
+      return new Promise((res) => {
+        if (window.YT && window.YT.Player) return res();
+        (window.__ytCbs = window.__ytCbs || []).push(res);
+        if (!window.__ytLoading) {
+          window.__ytLoading = true;
+          const prev = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = () => { prev && prev(); (window.__ytCbs || []).forEach((f) => f()); window.__ytCbs = []; };
+          const s = document.createElement('script');
+          s.src = 'https://www.youtube.com/iframe_api';
+          document.head.appendChild(s);
+        }
+      });
+    }
 
-  async function buildNativePlayer(l, stage) {
-    destroyNP();
-    np.rateIdx = 0;
-    np.pending = l.id;
-    stage.innerHTML = `
+    function npFmt(t) {
+      t = Math.max(0, Math.floor(t || 0));
+      const m = Math.floor(t / 60), s = t % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function destroyNP() {
+      if (np.tick) { clearInterval(np.tick); np.tick = null; }
+      if (np.barTimer) { clearTimeout(np.barTimer); np.barTimer = null; }
+      if (np.player && np.player.destroy) { try { np.player.destroy(); } catch (e) { } }
+      np.player = null; np.lesson = null; np.pending = null;
+    }
+
+    async function buildNativePlayer(l, stage) {
+      destroyNP();
+      np.rateIdx = 0;
+      np.pending = l.id;
+      stage.innerHTML = `
       <div class="np loading" id="np">
         <div class="np-frame"><div id="ytmount"></div></div>
         <div class="np-poster" style="background-image:url('${encodeURI(l.thumb)}')"></div>
@@ -1593,153 +2645,153 @@
         </div>
       </div>`;
 
-    await ytAPIReady();
-    if (np.pending !== l.id) return; // usuário trocou de aula/bônus durante o carregamento
-    np.lesson = l;
-    np.player = new YT.Player('ytmount', {
-      videoId: l.yt,
-      playerVars: { controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, playsinline: 1, fs: 0, origin: location.origin },
-      events: { onReady: onNPReady, onStateChange: onNPState },
-    });
-    wireNP();
-  }
-
-  function onNPReady() {
-    const el = document.getElementById('np');
-    if (el) el.classList.remove('loading');
-    npUpdateTime();
-  }
-
-  function onNPState(e) {
-    const el = document.getElementById('np');
-    if (!el || !window.YT) return;
-    const S = YT.PlayerState;
-    if (e.data === S.PLAYING) {
-      el.classList.add('playing', 'started'); el.classList.remove('loading');
-      setPlayIcon(true); npStartTick(); npArmHideBar();
-    } else if (e.data === S.PAUSED) {
-      el.classList.remove('playing'); setPlayIcon(false); npShowBar(); npStopTick();
-    } else if (e.data === S.BUFFERING) {
-      el.classList.add('loading');
-    } else if (e.data === S.ENDED) {
-      el.classList.remove('playing', 'loading'); setPlayIcon(false); npShowBar(); npStopTick();
-      const l = np.lesson;
-      if (l && FLAT.some((f) => f.id === l.id) && !done.has(l.id)) toggleDone(l.id); // só aulas reais: marca concluída + avança
+      await ytAPIReady();
+      if (np.pending !== l.id) return; // usuário trocou de aula/bônus durante o carregamento
+      np.lesson = l;
+      np.player = new YT.Player('ytmount', {
+        videoId: l.yt,
+        playerVars: { controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, playsinline: 1, fs: 0, origin: location.origin },
+        events: { onReady: onNPReady, onStateChange: onNPState },
+      });
+      wireNP();
     }
-    if (e.data !== S.BUFFERING) el.classList.remove('loading');
-  }
 
-  function setPlayIcon(playing) {
-    const b = document.getElementById('npPlay');
-    if (b) b.innerHTML = playing ? NP_ICON.pause : NP_ICON.play;
-  }
-
-  function npStartTick() { npStopTick(); np.tick = setInterval(npUpdateTime, 250); }
-  function npStopTick() { if (np.tick) { clearInterval(np.tick); np.tick = null; } }
-
-  function npUpdateTime() {
-    const p = np.player; if (!p || !p.getDuration) return;
-    const d = p.getDuration() || 0, c = p.getCurrentTime() || 0;
-    const t = document.getElementById('npTime'); if (t) t.textContent = npFmt(c) + ' / ' + npFmt(d);
-    const seek = document.getElementById('npSeek');
-    if (seek && !seek.dataset.drag) {
-      const v = d ? Math.round((c / d) * 1000) : 0;
-      seek.value = v;
-      seek.style.background = `linear-gradient(to right, var(--orange) ${v / 10}%, rgba(255,255,255,0.25) ${v / 10}%)`;
+    function onNPReady() {
+      const el = document.getElementById('np');
+      if (el) el.classList.remove('loading');
+      npUpdateTime();
     }
-  }
 
-  function npShowBar() { const el = document.getElementById('np'); if (el) el.classList.remove('hidebar'); }
-  function npArmHideBar() {
-    if (np.barTimer) clearTimeout(np.barTimer);
-    np.barTimer = setTimeout(() => { const el = document.getElementById('np'); if (el && el.classList.contains('playing')) el.classList.add('hidebar'); }, 2600);
-  }
+    function onNPState(e) {
+      const el = document.getElementById('np');
+      if (!el || !window.YT) return;
+      const S = YT.PlayerState;
+      if (e.data === S.PLAYING) {
+        el.classList.add('playing', 'started'); el.classList.remove('loading');
+        setPlayIcon(true); npStartTick(); npArmHideBar();
+      } else if (e.data === S.PAUSED) {
+        el.classList.remove('playing'); setPlayIcon(false); npShowBar(); npStopTick();
+      } else if (e.data === S.BUFFERING) {
+        el.classList.add('loading');
+      } else if (e.data === S.ENDED) {
+        el.classList.remove('playing', 'loading'); setPlayIcon(false); npShowBar(); npStopTick();
+        const l = np.lesson;
+        if (l && FLAT.some((f) => f.id === l.id) && !done.has(l.id)) toggleDone(l.id); // só aulas reais: marca concluída + avança
+      }
+      if (e.data !== S.BUFFERING) el.classList.remove('loading');
+    }
 
-  function wireNP() {
-    const el = document.getElementById('np');
-    const toggle = () => {
-      const p = np.player; if (!p || !p.getPlayerState) return;
-      if (p.getPlayerState() === YT.PlayerState.PLAYING) p.pauseVideo(); else p.playVideo();
-    };
-    document.getElementById('npClick').onclick = toggle;
-    document.getElementById('npCenter').onclick = toggle;
-    document.getElementById('npPlay').onclick = toggle;
+    function setPlayIcon(playing) {
+      const b = document.getElementById('npPlay');
+      if (b) b.innerHTML = playing ? NP_ICON.pause : NP_ICON.play;
+    }
 
-    const seek = document.getElementById('npSeek');
-    seek.addEventListener('input', () => {
-      seek.dataset.drag = '1';
-      const d = (np.player && np.player.getDuration()) || 0, t = d * (seek.value / 1000);
-      const tl = document.getElementById('npTime'); if (tl) tl.textContent = npFmt(t) + ' / ' + npFmt(d);
-      seek.style.background = `linear-gradient(to right, var(--orange) ${seek.value / 10}%, rgba(255,255,255,0.25) ${seek.value / 10}%)`;
-    });
-    seek.addEventListener('change', () => {
-      const d = (np.player && np.player.getDuration()) || 0;
-      if (np.player) np.player.seekTo(d * (seek.value / 1000), true);
-      delete seek.dataset.drag;
-    });
+    function npStartTick() { npStopTick(); np.tick = setInterval(npUpdateTime, 250); }
+    function npStopTick() { if (np.tick) { clearInterval(np.tick); np.tick = null; } }
 
-    const rate = document.getElementById('npRate');
-    rate.onclick = () => {
-      np.rateIdx = (np.rateIdx + 1) % NP_RATES.length;
-      if (np.player) np.player.setPlaybackRate(NP_RATES[np.rateIdx]);
-      rate.textContent = NP_RATES[np.rateIdx] + 'x';
-    };
+    function npUpdateTime() {
+      const p = np.player; if (!p || !p.getDuration) return;
+      const d = p.getDuration() || 0, c = p.getCurrentTime() || 0;
+      const t = document.getElementById('npTime'); if (t) t.textContent = npFmt(c) + ' / ' + npFmt(d);
+      const seek = document.getElementById('npSeek');
+      if (seek && !seek.dataset.drag) {
+        const v = d ? Math.round((c / d) * 1000) : 0;
+        seek.value = v;
+        seek.style.background = `linear-gradient(to right, var(--orange) ${v / 10}%, rgba(255,255,255,0.25) ${v / 10}%)`;
+      }
+    }
 
-    const mute = document.getElementById('npMute');
-    mute.onclick = () => {
-      const p = np.player; if (!p) return;
-      if (p.isMuted()) { p.unMute(); mute.innerHTML = NP_ICON.vol; } else { p.mute(); mute.innerHTML = NP_ICON.mute; }
-    };
+    function npShowBar() { const el = document.getElementById('np'); if (el) el.classList.remove('hidebar'); }
+    function npArmHideBar() {
+      if (np.barTimer) clearTimeout(np.barTimer);
+      np.barTimer = setTimeout(() => { const el = document.getElementById('np'); if (el && el.classList.contains('playing')) el.classList.add('hidebar'); }, 2600);
+    }
 
-    document.getElementById('npFs').onclick = () => {
-      if (document.fullscreenElement) document.exitFullscreen();
-      else if (el.requestFullscreen) el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    };
+    function wireNP() {
+      const el = document.getElementById('np');
+      const toggle = () => {
+        const p = np.player; if (!p || !p.getPlayerState) return;
+        if (p.getPlayerState() === YT.PlayerState.PLAYING) p.pauseVideo(); else p.playVideo();
+      };
+      document.getElementById('npClick').onclick = toggle;
+      document.getElementById('npCenter').onclick = toggle;
+      document.getElementById('npPlay').onclick = toggle;
 
-    el.addEventListener('mousemove', () => { npShowBar(); npArmHideBar(); });
-  }
+      const seek = document.getElementById('npSeek');
+      seek.addEventListener('input', () => {
+        seek.dataset.drag = '1';
+        const d = (np.player && np.player.getDuration()) || 0, t = d * (seek.value / 1000);
+        const tl = document.getElementById('npTime'); if (tl) tl.textContent = npFmt(t) + ' / ' + npFmt(d);
+        seek.style.background = `linear-gradient(to right, var(--orange) ${seek.value / 10}%, rgba(255,255,255,0.25) ${seek.value / 10}%)`;
+      });
+      seek.addEventListener('change', () => {
+        const d = (np.player && np.player.getDuration()) || 0;
+        if (np.player) np.player.seekTo(d * (seek.value / 1000), true);
+        delete seek.dataset.drag;
+      });
 
-  function renderPlayer() {
-    const idx = FLAT.findIndex((l) => l.id === currentId);
-    const l = FLAT[idx];
-    const m = l.module;
+      const rate = document.getElementById('npRate');
+      rate.onclick = () => {
+        np.rateIdx = (np.rateIdx + 1) % NP_RATES.length;
+        if (np.player) np.player.setPlaybackRate(NP_RATES[np.rateIdx]);
+        rate.textContent = NP_RATES[np.rateIdx] + 'x';
+      };
 
-    renderVideoStage(l);
-    $('playerEyebrow').textContent = `Módulo ${String(l.mIndex + 1).padStart(2,'0')} · ${m.title} — Aula ${l.lIndex + 1}`;
-    $('playerTitle').textContent = l.name;
-    $('playerDesc').textContent = l.desc;
+      const mute = document.getElementById('npMute');
+      mute.onclick = () => {
+        const p = np.player; if (!p) return;
+        if (p.isMuted()) { p.unMute(); mute.innerHTML = NP_ICON.vol; } else { p.mute(); mute.innerHTML = NP_ICON.mute; }
+      };
 
-    // complete button
-    const isDone = done.has(l.id);
-    const cb = $('completeBtn');
-    cb.className = 'btn-complete' + (isDone ? ' done' : '');
-    cb.innerHTML = isDone
-      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Aula concluída'
-      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Marcar como concluída';
-    cb.onclick = () => toggleDone(l.id);
+      document.getElementById('npFs').onclick = () => {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      };
 
-    // prev / next (global flow)
-    const prev = FLAT[idx - 1], next = FLAT[idx + 1];
-    $('prevBtn').disabled = !prev;
-    $('nextBtn').disabled = !next;
-    $('prevBtn').onclick = () => prev && openLesson(prev.id);
-    $('nextBtn').onclick = () => next && openLesson(next.id);
+      el.addEventListener('mousemove', () => { npShowBar(); npArmHideBar(); });
+    }
 
-    // playlist (this module)
-    $('plModule').textContent = `Módulo ${String(l.mIndex + 1).padStart(2,'0')}`;
-    $('plTitle').textContent = m.title;
-    const mp = moduleProgress(m);
-    $('plBarFill').style.width = mp.pct + '%';
+    function renderPlayer() {
+      const idx = FLAT.findIndex((l) => l.id === currentId);
+      const l = FLAT[idx];
+      const m = l.module;
 
-    const wrap = $('plItems');
-    wrap.innerHTML = '';
-    m.lessons.forEach((ls, i) => {
-      const active = ls.id === currentId;
-      const complete = done.has(ls.id);
-      const item = document.createElement('button');
-      item.className = 'playlist-item' + (active ? ' active' : '') + (complete ? ' complete' : '');
-      item.innerHTML = `
+      renderVideoStage(l);
+      $('playerEyebrow').textContent = `Módulo ${String(l.mIndex + 1).padStart(2, '0')} · ${m.title} — Aula ${l.lIndex + 1}`;
+      $('playerTitle').textContent = l.name;
+      $('playerDesc').textContent = l.desc;
+
+      // complete button
+      const isDone = done.has(l.id);
+      const cb = $('completeBtn');
+      cb.className = 'btn-complete' + (isDone ? ' done' : '');
+      cb.innerHTML = isDone
+        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Aula concluída'
+        : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Marcar como concluída';
+      cb.onclick = () => toggleDone(l.id);
+
+      // prev / next (global flow)
+      const prev = FLAT[idx - 1], next = FLAT[idx + 1];
+      $('prevBtn').disabled = !prev;
+      $('nextBtn').disabled = !next;
+      $('prevBtn').onclick = () => prev && openLesson(prev.id);
+      $('nextBtn').onclick = () => next && openLesson(next.id);
+
+      // playlist (this module)
+      $('plModule').textContent = `Módulo ${String(l.mIndex + 1).padStart(2, '0')}`;
+      $('plTitle').textContent = m.title;
+      const mp = moduleProgress(m);
+      $('plBarFill').style.width = mp.pct + '%';
+
+      const wrap = $('plItems');
+      wrap.innerHTML = '';
+      m.lessons.forEach((ls, i) => {
+        const active = ls.id === currentId;
+        const complete = done.has(ls.id);
+        const item = document.createElement('button');
+        item.className = 'playlist-item' + (active ? ' active' : '') + (complete ? ' complete' : '');
+        item.innerHTML = `
         <span class="pl-check">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </span>
@@ -1750,63 +2802,64 @@
         <span class="pl-playing">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
         </span>`;
-      item.addEventListener('click', () => openLesson(ls.id));
-      wrap.appendChild(item);
-    });
-  }
-
-  function toggleDone(id) {
-    if (done.has(id)) {
-      done.delete(id);
-    } else {
-      done.add(id);
-      const idx = FLAT.findIndex((l) => l.id === id);
-      const next = FLAT[idx + 1];
-      if (done.size === TOTAL_LESSONS) {
-        toast('🎉 Curso concluído! Bora pro arraiá!');
-      } else {
-        toast('✓ Aula concluída!');
-        // auto-advance after a beat
-        if (next) setTimeout(() => { if (currentId === id) openLesson(next.id); }, 700);
-      }
+        item.addEventListener('click', () => openLesson(ls.id));
+        wrap.appendChild(item);
+      });
     }
-    saveDone();
-    updateProgress();
-    renderPlayer();
-  }
 
-  /* ════════════════════════════════════════════════════════
-     NAV / UTIL
-  ════════════════════════════════════════════════════════ */
-  function showView(name) {
-    if (name === 'dash') destroyNP(); // para o vídeo/áudio ao voltar ao painel
-    document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
-    $(name + 'View').classList.add('active');
-    if (name === 'dash') renderDashboard();
-  }
+    function toggleDone(id) {
+      if (done.has(id)) {
+        done.delete(id);
+      } else {
+        done.add(id);
+        const idx = FLAT.findIndex((l) => l.id === id);
+        const next = FLAT[idx + 1];
+        if (done.size === TOTAL_LESSONS) {
+          toast('🎉 Curso concluído! Bora pro São João!');
+        } else {
+          toast('✓ Aula concluída!');
+          // auto-advance after a beat
+          if (next) setTimeout(() => { if (currentId === id) openLesson(next.id); }, 700);
+        }
+      }
+      saveDone();
+      updateProgress();
+      renderPlayer();
+    }
 
-  $('backBtn').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-  $('bonusBack').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-  $('homeLogo').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    /* ════════════════════════════════════════════════════════
+       NAV / UTIL
+    ════════════════════════════════════════════════════════ */
+    function showView(name) {
+      if (name === 'dash') destroyNP(); // para o vídeo/áudio ao voltar ao painel
+      document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+      $(name + 'View').classList.add('active');
+      if (name === 'dash') renderDashboard();
+    }
 
-  let toastTimer;
-  function toast(msg) {
-    const t = $('toast');
-    t.innerHTML = msg;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
-  }
+    $('backBtn').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    $('bonusBack').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    $('homeLogo').addEventListener('click', () => { showView('dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-  /* ── BANDEIRINHAS render ── */
-  document.querySelectorAll('.bunting').forEach((b) => {
-    b.innerHTML = Array.from({ length: 40 }, () => '<i></i>').join('');
-  });
+    let toastTimer;
+    function toast(msg) {
+      const t = $('toast');
+      t.innerHTML = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
 
-  /* ════════════════════════════════════════════════════════
-     BOOT
-  ════════════════════════════════════════════════════════ */
-  enterApp();
+    /* ── BANDEIRINHAS render ── */
+    document.querySelectorAll('.bunting').forEach((b) => {
+      b.innerHTML = Array.from({ length: 40 }, () => '<i></i>').join('');
+    });
+
+    /* ════════════════════════════════════════════════════════
+       BOOT
+    ════════════════════════════════════════════════════════ */
+    enterApp();
   </script>
 </body>
+
 </html>
