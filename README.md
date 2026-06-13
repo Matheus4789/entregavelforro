@@ -27,7 +27,20 @@ const COMUNIDADE_URL = ''; // convite do grupo (WhatsApp/Telegram) — bônus "C
 const AULA_BONUS_YT  = ''; // ID do YouTube da aula bônus — bônus "Passos Avançados"
 ```
 
-Enquanto vazias, o bônus mostra um aviso de "configure aqui"; preenchidas, viram o botão/vídeo.
+Enquanto vazias, o bônus mostra "Conteúdo sendo gerado"; preenchidas, viram o botão/vídeo.
+
+## Ofertas (produtos pagos)
+
+A seção "Ofertas pra você" no dashboard vende produtos extras. A primeira é a
+**Playlist do Salão + Passos de Cada Música**: cada música traz andamento e os passos
+ideais — e os passos são **clicáveis**, abrindo a aula correspondente.
+
+Cada oferta em `OFFERS` (no script do `index.html`) tem:
+- `checkout` — link de pagamento (vazio mostra aviso).
+- `code` — código que o aluno usa pra desbloquear após comprar (ex.: `SALAO`).
+
+O desbloqueio é cosmético (guardado em `localStorage` → `enf_unlocked`), ideal pra MVP
+sem backend. Para travar de verdade por compra, é preciso um backend de validação.
 
 ## Vídeos (YouTube) e player nativo
 

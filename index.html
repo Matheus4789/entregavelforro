@@ -429,6 +429,70 @@
 
     .bonus-pill.pending { color: var(--muted); border-color: var(--line); }
 
+    /* ── OFERTAS (cards no dashboard) ────────────────────── */
+    .offers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .offer-card {
+      text-align: left; cursor: pointer; position: relative; overflow: hidden;
+      background: var(--orange); color: var(--black);
+      border: 2px solid var(--black); border-radius: 16px; padding: 22px 22px 18px;
+      display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .offer-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+    .offer-badge {
+      align-self: flex-start; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 9px;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--orange); background: var(--black);
+      padding: 4px 11px; border-radius: 9999px; margin-bottom: 14px;
+    }
+    .offer-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.03em; font-size: 21px; line-height: 1; margin-bottom: 8px; }
+    .offer-desc { font-size: 13.5px; line-height: 1.5; color: rgba(0,0,0,0.7); margin-bottom: 18px; flex: 1; }
+    .offer-foot { display: flex; align-items: center; justify-content: space-between; }
+    .offer-price { font-family: 'Archivo Black', sans-serif; font-size: 22px; letter-spacing: -0.03em; }
+    .offer-old { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; text-decoration: line-through; color: rgba(0,0,0,0.45); margin-right: 4px; }
+    .offer-lock, .offer-access {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: -0.02em;
+      background: var(--black); color: var(--orange); padding: 7px 12px; border-radius: 9999px;
+    }
+
+    /* ── TELA DE COMPRA / DESBLOQUEIO ────────────────────── */
+    .buygate { background: var(--black); border: 1px solid var(--line); border-radius: 18px; padding: 30px; text-align: center; }
+    .buygate-price { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 6px; }
+    .buygate-old { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 16px; text-decoration: line-through; color: var(--muted); }
+    .buygate-now { font-family: 'Archivo Black', sans-serif; font-size: 44px; letter-spacing: -0.04em; color: var(--orange); }
+    .buygate-list { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .buygate-code { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .buygate-code-label { display: block; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 12px; }
+    .buygate-code-row { display: flex; gap: 10px; max-width: 380px; margin: 0 auto; }
+    .buygate-code-row input {
+      flex: 1; background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 10px;
+      padding: 12px 14px; color: var(--white); font-size: 14px; font-family: 'Inter', sans-serif; text-align: center; text-transform: uppercase;
+    }
+    .buygate-code-row input:focus { outline: none; border-color: var(--orange); }
+    .buygate-err { display: block; color: #ff6b4a; font-size: 12px; margin-top: 10px; min-height: 14px; }
+
+    /* ── LISTA MÚSICA + PASSOS ───────────────────────────── */
+    .song-list { display: flex; flex-direction: column; gap: 10px; }
+    .song-row { background: var(--black); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; transition: border-color 0.2s; }
+    .song-row:hover { border-color: rgba(255,77,0,0.4); }
+    .song-top { display: flex; align-items: center; gap: 14px; }
+    .song-num { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; color: var(--orange); min-width: 22px; }
+    .song-main { flex: 1; min-width: 0; text-decoration: none; }
+    .song-title { display: block; font-size: 15px; font-weight: 600; color: var(--white); }
+    .song-main:hover .song-title { color: var(--orange); }
+    .song-sub { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+    .song-feel { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 9999px; flex-shrink: 0; }
+    .feel-lento { background: rgba(58,134,255,0.15); color: #6ea8ff; }
+    .feel-médio { background: rgba(255,210,63,0.15); color: #ffd23f; }
+    .feel-acelerado { background: rgba(247,37,133,0.15); color: #ff5fa2; }
+    .song-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-left: 36px; }
+    .step-tag {
+      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: -0.02em;
+      color: var(--orange); background: rgba(255,77,0,0.1); border: 1px solid rgba(255,77,0,0.3);
+      padding: 5px 11px; border-radius: 9999px; cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .step-tag:hover { background: var(--orange); color: var(--black); }
+    .step-tag.static { color: var(--muted); background: rgba(255,255,255,0.04); border-color: var(--line); cursor: default; }
+
     /* ═══════════════════════════════════════════════════════
        LESSON PLAYER VIEW
     ═══════════════════════════════════════════════════════ */
@@ -774,6 +838,13 @@
           <span class="count">06 bônus</span>
         </div>
         <div class="bonus-grid" id="bonusGrid"></div>
+
+        <!-- ofertas -->
+        <div class="section-head" id="offersHead">
+          <h2>Ofertas pra você</h2>
+          <span class="count">Turbine seu forró</span>
+        </div>
+        <div class="offers-grid" id="offersGrid"></div>
       </section>
 
       <!-- ───────── PLAYER ───────── -->
@@ -821,7 +892,7 @@
         <div class="player-top">
           <button class="back-link" id="bonusBack">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Voltar aos bônus
+            Voltar
           </button>
         </div>
         <div class="bonus-detail" id="bonusDetail"></div>
@@ -946,6 +1017,38 @@
     },
   ];
 
+  /* ════════════════════════════════════════════════════════
+     OFERTAS (produtos pagos dentro da área)
+  ════════════════════════════════════════════════════════ */
+  // ⚙️ EDITE AQUI por oferta: link de checkout e código de desbloqueio do aluno
+  const OFFERS = [
+    {
+      id: 'o1',
+      title: 'Playlist do Salão + Passos de Cada Música',
+      desc: 'A playlist certa pra treinar — e exatamente quais passos usar em cada música.',
+      price: 'R$19,90', old: 'R$39,90',
+      tag: 'Playlist Pro',
+      checkout: '', // ex.: 'https://seucheckout.com/playlist-do-salao'
+      code: 'SALAO',  // código que o aluno recebe após comprar
+      type: 'playsteps',
+      intro: 'Cada música vem com o andamento e os passos ideais pra treinar nela — toque no passo pra abrir a aula. Comece pelas lentas e vá acelerando.',
+      songs: [
+        { t: 'Esperando na Janela', a: 'Targino Gondim', feel: 'Lento',     steps: ['Abraço', 'Bom Dia + Encaixe'] },
+        { t: 'De Volta pro Aconchego', a: 'Dominguinhos', feel: 'Lento',     steps: ['Abraço', 'Chave de Braço e Charme da Dama'] },
+        { t: 'Xote dos Milagres', a: 'Falamansa', feel: 'Médio',             steps: ['Passo Básico', 'Abraço', 'Giro Simples'] },
+        { t: 'Asa Branca', a: 'Luiz Gonzaga', feel: 'Médio',                 steps: ['Passo Básico', 'Giro Simples'] },
+        { t: 'Eu Só Quero Um Xodó', a: 'Dominguinhos', feel: 'Médio',        steps: ['Passo Básico', 'Chuveirinho'] },
+        { t: 'Qui Nem Jiló', a: 'Luiz Gonzaga', feel: 'Médio',              steps: ['Giro Simples', 'Chuveirinho'] },
+        { t: 'Bonita Demais', a: 'Flávio José', feel: 'Médio',               steps: ['Chuveirinho', 'Pião'] },
+        { t: 'Chão de Giz', a: 'Elba Ramalho', feel: 'Médio',               steps: ['Caminhada Redonda', 'Giro Duplo'] },
+        { t: 'Anunciação', a: 'Alceu Valença', feel: 'Acelerado',           steps: ['Giro em Linha', 'Arco Destro'] },
+        { t: 'Procurando Tu', a: 'Trio Nordestino', feel: 'Acelerado',       steps: ['Giro Simples', 'Arco-Íris + Giro em Linha'] },
+        { t: 'Sebastiana', a: 'Genival Lacerda', feel: 'Acelerado',          steps: ['Rapidinhas (Variações)', 'Manivela + Giro Ninja'] },
+        { t: 'Forró do Xenhenhém', a: 'Genival Lacerda', feel: 'Acelerado',  steps: ['Assalto em Linha', 'Pião Invertido'] },
+      ],
+    },
+  ];
+
   const TOTAL_LESSONS = COURSE.reduce((n, m) => n + m.lessons.length, 0);
   const FLAT = COURSE.flatMap((m, mi) => m.lessons.map((l, li) => ({ ...l, mIndex: mi, lIndex: li, module: m })));
 
@@ -956,11 +1059,15 @@
   const LS_LAST = 'enf_last';
   const LS_CHECK = 'enf_check';
 
+  const LS_UNLOCK = 'enf_unlocked';
+
   let done = new Set(JSON.parse(localStorage.getItem(LS_DONE) || '[]'));
   let bchecks = new Set(JSON.parse(localStorage.getItem(LS_CHECK) || '[]'));
+  let unlocked = new Set(JSON.parse(localStorage.getItem(LS_UNLOCK) || '[]'));
 
   const saveDone = () => localStorage.setItem(LS_DONE, JSON.stringify([...done]));
   const saveChecks = () => localStorage.setItem(LS_CHECK, JSON.stringify([...bchecks]));
+  const saveUnlock = () => localStorage.setItem(LS_UNLOCK, JSON.stringify([...unlocked]));
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -988,6 +1095,7 @@
     renderContinue();
     renderModules();
     renderBonuses();
+    renderOffers();
   }
 
   function updateProgress() {
@@ -1107,6 +1215,121 @@
   /* ════════════════════════════════════════════════════════
      BÔNUS (entregáveis)
   ════════════════════════════════════════════════════════ */
+  /* ════════════════════════════════════════════════════════
+     OFERTAS
+  ════════════════════════════════════════════════════════ */
+  const lessonIdByName = (name) => {
+    const l = FLAT.find((x) => x.name.toLowerCase() === String(name).toLowerCase());
+    return l ? l.id : null;
+  };
+
+  function renderOffers() {
+    const grid = $('offersGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    OFFERS.forEach((o) => {
+      const owned = unlocked.has(o.id);
+      const el = document.createElement('button');
+      el.className = 'offer-card';
+      el.innerHTML = `
+        <div class="offer-badge">${owned ? '✓ Liberado' : o.tag}</div>
+        <h3 class="offer-title">${esc(o.title)}</h3>
+        <p class="offer-desc">${esc(o.desc)}</p>
+        <div class="offer-foot">
+          ${owned
+            ? `<span class="offer-access">Acessar agora →</span>`
+            : `<span class="offer-price"><span class="offer-old">${esc(o.old || '')}</span> ${esc(o.price)}</span>
+               <span class="offer-lock"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>`}
+        </div>`;
+      el.addEventListener('click', () => openOffer(o.id));
+      grid.appendChild(el);
+    });
+  }
+
+  function openOffer(id) {
+    const o = OFFERS.find((x) => x.id === id);
+    if (!o) return;
+    renderOfferDetail(o);
+    showView('bonus');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderOfferDetail(o) {
+    const wrap = $('bonusDetail');
+    if (!unlocked.has(o.id)) {
+      // tela de compra / desbloqueio
+      wrap.innerHTML = `
+        <div class="bd-head">
+          <div class="bd-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
+        </div>
+        <p class="bd-intro">${esc(o.desc)}</p>
+        <div class="buygate">
+          <div class="buygate-price"><span class="buygate-old">${esc(o.old || '')}</span><span class="buygate-now">${esc(o.price)}</span></div>
+          <p class="buygate-list">${o.songs.length} músicas · andamento + passos de cada uma · passos clicáveis que abrem a aula</p>
+          ${o.checkout
+            ? `<a class="bd-cta" href="${o.checkout}" target="_blank" rel="noopener">Comprar agora
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>`
+            : `<div class="bd-note">🔗 Link de checkout ainda não configurado. Defina <strong>checkout</strong> nesta oferta (index.html).</div>`}
+          <div class="buygate-code">
+            <span class="buygate-code-label">Já comprou? Insira o código de acesso</span>
+            <div class="buygate-code-row">
+              <input type="text" id="unlockInput" placeholder="Ex.: ${esc(o.code)}" />
+              <button class="btn-ghost" id="unlockBtn">Desbloquear</button>
+            </div>
+            <span class="buygate-err" id="unlockErr"></span>
+          </div>
+        </div>`;
+      const tryUnlock = () => {
+        const v = $('unlockInput').value.trim().toUpperCase();
+        if (v && v === String(o.code).toUpperCase()) {
+          unlocked.add(o.id); saveUnlock();
+          toast('🔓 Oferta liberada!');
+          renderOfferDetail(o);
+        } else {
+          $('unlockErr').textContent = 'Código inválido. Confira o e-mail da compra.';
+        }
+      };
+      $('unlockBtn').addEventListener('click', tryUnlock);
+      $('unlockInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+      return;
+    }
+
+    // conteúdo liberado
+    if (o.type === 'playsteps') {
+      const rows = o.songs.map((s, i) => {
+        const q = encodeURIComponent(`${s.a} ${s.t}`);
+        const steps = s.steps.map((name) => {
+          const lid = lessonIdByName(name);
+          return lid
+            ? `<button class="step-tag" data-lesson="${lid}">${esc(name)}</button>`
+            : `<span class="step-tag static">${esc(name)}</span>`;
+        }).join('');
+        return `<div class="song-row">
+          <div class="song-top">
+            <span class="song-num">${String(i + 1).padStart(2, '0')}</span>
+            <a class="song-main" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">
+              <span class="song-title">${esc(s.t)}</span>
+              <span class="song-sub">${esc(s.a)}</span>
+            </a>
+            <span class="song-feel feel-${s.feel.toLowerCase()}">${esc(s.feel)}</span>
+          </div>
+          <div class="song-steps">${steps}</div>
+        </div>`;
+      }).join('');
+      wrap.innerHTML = `
+        <div class="bd-head">
+          <div class="bd-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
+        </div>
+        <p class="bd-intro">${esc(o.intro)}</p>
+        <div class="song-list">${rows}</div>`;
+      wrap.querySelectorAll('.step-tag[data-lesson]').forEach((b) => {
+        b.addEventListener('click', () => openLesson(b.dataset.lesson));
+      });
+    }
+  }
+
   const isBonusPending = (b) => (b.type === 'link' && !b.url) || (b.type === 'video' && !b.yt);
 
   function bonusSoonHTML() {
