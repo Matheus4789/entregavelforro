@@ -10,8 +10,24 @@
 - **2 trilhas · 17 aulas em vídeo** — Trilha Iniciante (9) e Trilha Intermediária (8), com os vídeos hospedados no **YouTube** tocando num player nativo.
 - **Player nativo** — UI própria (play/pause, seek, tempo, velocidade, mudo, fullscreen) com a barra/branding do YouTube ocultos; lista lateral (playlist), marcar como concluída, anterior/próxima e avanço automático ao terminar.
 - **Miniaturas** — reaproveitadas das artes da oferta (`assets/mod*.png`, `assets/aula_*.png`).
-- **6 bônus** liberados.
-- **Progresso salvo** em `localStorage` (chaves `enf_done`, `enf_last`).
+- **6 bônus com entregável real** — cada card abre uma página própria:
+  - *Guia da Abordagem Certa* e *Checklist Anti-Travada* — conteúdo escrito (checklist marcável).
+  - *Playlist "Arrasta-pé"* — clássicos do forró, cada um abre no YouTube.
+  - *Agenda de Forrós* — links pra achar forró perto (Sympla, Instagram, etc.).
+  - *Comunidade VIP* — botão pro grupo (configurável).
+  - *Aula Bônus* — player nativo (configurável).
+- **Progresso salvo** em `localStorage` (chaves `enf_done`, `enf_last`, `enf_check`).
+
+## Configurar bônus (link do grupo e vídeo bônus)
+
+No topo do `<script>` do `index.html` há duas constantes pra você preencher:
+
+```js
+const COMUNIDADE_URL = ''; // convite do grupo (WhatsApp/Telegram) — bônus "Comunidade VIP"
+const AULA_BONUS_YT  = ''; // ID do YouTube da aula bônus — bônus "Passos Avançados"
+```
+
+Enquanto vazias, o bônus mostra um aviso de "configure aqui"; preenchidas, viram o botão/vídeo.
 
 ## Vídeos (YouTube) e player nativo
 
