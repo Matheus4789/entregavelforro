@@ -797,6 +797,16 @@
       box-shadow: 0 12px 30px rgba(255, 77, 0, 0.3);
     }
 
+    .bd-download {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: var(--black);
+      font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px;
+      text-transform: uppercase; letter-spacing: -0.02em;
+      padding: 12px 20px; border-radius: 9999px; text-decoration: none;
+      margin-bottom: 22px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .bd-download:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,77,0,0.3); }
+
     .bd-note {
       margin-top: 18px;
       padding: 14px 16px;
@@ -2063,6 +2073,7 @@
         checkout: '', // ex.: 'https://seucheckout.com/playlist-do-sao-joao'
         code: 'SAOJOAO',  // código que o aluno recebe após comprar
         type: 'playsteps',
+        pdf: 'assets/playlist-sao-joao.pdf',
         intro: 'Cada música vem com o andamento e os passos ideais pra treinar nela — toque no passo pra abrir a aula. Comece pelas lentas e vá acelerando.',
         songs: [
           { t: 'Esperando na Janela', a: 'Targino Gondim', feel: 'Lento', steps: ['Abraço', 'Bom Dia + Encaixe'] },
@@ -2450,6 +2461,9 @@
           <div><div class="bd-tag">Oferta · ${esc(o.tag)}</div><h1 class="bd-title">${esc(o.title)}</h1></div>
         </div>
         <p class="bd-intro">${esc(o.intro)}</p>
+        ${o.pdf ? `<a class="bd-download" href="${o.pdf}" download target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Baixar a playlist em PDF</a>` : ''}
         <div class="song-list">${rows}</div>`;
         wrap.querySelectorAll('.step-tag[data-lesson]').forEach((b) => {
           b.addEventListener('click', () => openLesson(b.dataset.lesson));
